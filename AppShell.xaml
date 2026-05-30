@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="DailyFoodSetApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:DailyFoodSetApp.Views"
+    Title="Daily Meal Planner"
+    Shell.BackgroundColor="#FFFFFF"
+    Shell.ForegroundColor="#2E8B57"
+    Shell.TitleColor="#2E8B57"
+    Shell.TabBarBackgroundColor="#FFFFFF"
+    Shell.TabBarTitleColor="#2E8B57"
+    Shell.TabBarUnselectedColor="#A0D6B4">
+
+    <TabBar>
+        <ShellContent Title="Generator" ContentTemplate="{DataTemplate views:MealGeneratorPage}" />
+        <ShellContent Title="Catalog" ContentTemplate="{DataTemplate views:FoodSearchPage}" />
+        <ShellContent Title="Hardware" ContentTemplate="{DataTemplate views:HardwarePage}" />
+        <ShellContent Title="Settings" ContentTemplate="{DataTemplate views:SettingsPage}" />
+    </TabBar>
+</Shell>
