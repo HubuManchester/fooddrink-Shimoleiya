@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DailyFoodSetApp.Views.FoodSearchPage"
+             BackgroundColor="#F5FFF5"
+             Title="Food Search">
+    <Grid RowDefinitions="Auto, *">
+
+        <Border Stroke="#2E8B57" StrokeThickness="2" BackgroundColor="White" Padding="0" Margin="15">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10"/>
+            </Border.StrokeShape>
+            <SearchBar x:Name="FoodSearchBar" 
+                       Placeholder="Search food name or category..." 
+                       SearchButtonPressed="OnSearchPressed"
+                       TextChanged="OnSearchTextChanged"
+                       CancelButtonColor="#2E8B57" />
+        </Border>
+
+        <CollectionView Grid.Row="1" x:Name="FoodCollection" Margin="15,0,15,0">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Stroke="#A0D6B4" StrokeThickness="1" BackgroundColor="White" Padding="15" Margin="0,0,0,10">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8"/>
+                        </Border.StrokeShape>
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold" TextColor="#333333"/>
+                            <HorizontalStackLayout Spacing="10">
+                                <Label Text="{Binding Category}" TextColor="#2E8B57"/>
+                                <Label Text="{Binding Spiciness}" TextColor="#FF4500"/>
+                                <Label Text="{Binding CaloriesLabel}" TextColor="#FF8C00"/>
+                            </HorizontalStackLayout>
+                            <Label Text="{Binding Description}" FontSize="12" TextColor="#666666"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+</ContentPage>

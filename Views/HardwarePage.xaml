@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DailyFoodSetApp.Views.HardwarePage"
+             BackgroundColor="#F5FFF5"
+             Title="Hardware Demo">
+
+    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <Label Text="Under Construction..." FontSize="24" TextColor="#2E8B57" FontAttributes="Bold" />
+    </VerticalStackLayout>
+</ContentPage>

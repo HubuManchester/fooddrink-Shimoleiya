@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DailyFoodSetApp.Views.MealGeneratorPage"
+             BackgroundColor="#F5FFF5"
+             Title="Menu Generator">
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="20">
+
+            <Border Stroke="#2E8B57" StrokeThickness="2" BackgroundColor="White" Padding="15">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Customize Your Daily Plan" FontSize="20" FontAttributes="Bold" TextColor="#2E8B57"/>
+
+                    <Entry x:Name="CaloriesEntry" Placeholder="Target Calories (e.g., 1500)" Keyboard="Numeric" TextColor="#333333"/>
+
+                    <Picker x:Name="SpicinessPicker" Title="Select Spiciness Level" TextColor="#333333">
+                        <Picker.Items>
+                            <x:String>Not Spicy</x:String>
+                            <x:String>Mild</x:String>
+                            <x:String>Medium</x:String>
+                            <x:String>Extra Spicy</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <Button Text="Generate Plan" BackgroundColor="#2E8B57" TextColor="White" FontAttributes="Bold" Clicked="OnGenerateClicked"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <VerticalStackLayout x:Name="ResultsContainer" IsVisible="False" Spacing="15">
+                <Label Text="Your Recommendations For Today" FontSize="18" FontAttributes="Bold" TextColor="#2E8B57"/>
+                <CollectionView x:Name="MealPlanCollection">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Stroke="#A0D6B4" StrokeThickness="1" BackgroundColor="White" Padding="15" Margin="0,0,0,10">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="8"/>
+                                </Border.StrokeShape>
+                                <Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto">
+                                    <Label Text="{Binding Category}" FontSize="14" TextColor="#2E8B57" FontAttributes="Bold"/>
+                                    <Label Grid.Row="1" Text="{Binding Name}" FontSize="18" TextColor="#333333" FontAttributes="Bold"/>
+                                    <Label Grid.Column="1" Grid.RowSpan="2" Text="{Binding CaloriesLabel}" FontSize="16" TextColor="#FF8C00" VerticalOptions="Center"/>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
