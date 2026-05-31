@@ -12,16 +12,20 @@ public partial class MealGeneratorPage : ContentPage
 
     private async void OnGenerateClicked(object sender, EventArgs e)
     {
-        // Check input conversion validity
         if (!int.TryParse(CaloriesEntry.Text, out int calories))
         {
-            await DisplayAlert("Alert", "Please enter a valid calorie value.", "OK");
+            await DisplayAlert("Input Error", "Please enter a valid numeric value for calories.", "OK");
+            return;
+        }
+
+        if (calories <= 0)
+        {
+            await DisplayAlert("Input Error", "Calories must be greater than zero.", "OK");
             return;
         }
 
         string spiciness = SpicinessPicker.SelectedItem?.ToString() ?? "Not Spicy";
 
-        // Await asynchronous data retrieval processing
         var plan = await FoodService.GenerateMealPlanAsync(calories, spiciness);
 
         MealPlanCollection.ItemsSource = plan;

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http.Json;
 using DailyFoodSetApp.Models;
@@ -13,20 +12,6 @@ public static class FoodService
     private static readonly HttpClient HttpClient = new() { Timeout = TimeSpan.FromSeconds(10) };
     private static List<FoodItem>? _cachedFoods;
 
-    // Hardcoded English local data setup
-    private static readonly List<FoodItem> LocalFoods = new()
-    {
-        new() { Name = "Berry Oatmeal Bowl", Category = "Breakfast", Calories = 320, Spiciness = "Not Spicy", Description = "Healthy and high protein breakfast option." },
-        new() { Name = "Spicy Chicken Wrap", Category = "Breakfast", Calories = 450, Spiciness = "Mild", Description = "Energetic wrap to start your morning." },
-        new() { Name = "Steamed Veggies & Brown Rice", Category = "Lunch", Calories = 480, Spiciness = "Not Spicy", Description = "Low-fat and clean diet meal for fitness." },
-        new() { Name = "Mapo Tofu Rice Bowl", Category = "Lunch", Calories = 620, Spiciness = "Medium", Description = "Classic spicy Sichuan tofu served over hot rice." },
-        new() { Name = "Pan-Seared Salmon with Asparagus", Category = "Dinner", Calories = 410, Spiciness = "Not Spicy", Description = "Premium fish fillet rich in Omega-3 fatty acids." },
-        new() { Name = "Szechuan Poached Beef", Category = "Dinner", Calories = 750, Spiciness = "Extra Spicy", Description = "Very authentic, rich, and highly seasoned dish." },
-        new() { Name = "Sugar-Free Green Tea", Category = "Drink", Calories = 0, Spiciness = "Not Spicy", Description = "Refreshing, iced, and absolutely clean taste." },
-        new() { Name = "Sparkling Fruit Juice", Category = "Drink", Calories = 110, Spiciness = "Not Spicy", Description = "Slightly sweet and bubbly natural booster." }
-    };
-
-    // Fetches items from remote API if configured, otherwise falls back to local data smoothly
     private static async Task<List<FoodItem>> GetAllFoodsAsync()
     {
         if (_cachedFoods != null && _cachedFoods.Any())
@@ -43,18 +28,13 @@ public static class FoodService
                     return _cachedFoods;
                 }
             }
-            catch
-            {
-                // Network error fallback to local data silently during demo
-            }
+            catch { }
         }
 
-        // Default local source
-        _cachedFoods = new List<FoodItem>(LocalFoods);
+        _cachedFoods = new List<FoodItem>(FoodDataStore.SeedData);
         return _cachedFoods;
     }
 
-    // Filters data by search terms asynchronously
     public static async Task<List<FoodItem>> SearchFoodsAsync(string query)
     {
         var allItems = await GetAllFoodsAsync();
@@ -69,34 +49,43 @@ public static class FoodService
             .OrderBy(f => f.Name).ToList();
     }
 
-    // Recommends 4 items based on criteria asynchronously
     public static async Task<List<FoodItem>> GenerateMealPlanAsync(int targetCalories, string preferredSpiciness)
     {
         var allItems = await GetAllFoodsAsync();
         var selectedPlan = new List<FoodItem>();
         var random = new Random();
 
-        // Helper delegate to handle dynamic filtering and fallback loops
-        FoodItem PickItemByCategory(string category)
+        int breakfastCalLimit = (int)(targetCalories * 0.30) + 100;
+        int lunchCalLimit = (int)(targetCalories * 0.35) + 150;
+        int dinnerCalLimit = (int)(targetCalories * 0.30) + 150;
+        int drinkCalLimit = (int)(targetCalories * 0.05) + 100;
+
+        FoodItem FindMatch(string category, int maxCalories)
         {
-            var options = allItems.Where(f => f.Category.Equals(category, StringComparison.OrdinalIgnoreCase) &&
-                                              (f.Spiciness.Equals(preferredSpiciness, StringComparison.OrdinalIgnoreCase) || f.Spiciness.Equals("Not Spicy", StringComparison.OrdinalIgnoreCase))).ToList();
+            var candidates = allItems.Where(f =>
+                f.Category.Equals(category, StringComparison.OrdinalIgnoreCase) &&
+                f.Spiciness.Equals(preferredSpiciness, StringComparison.OrdinalIgnoreCase) &&
+                f.Calories <= maxCalories).ToList();
 
-            // Fallback 1: Ignore spiciness check if zero matches found
-            if (!options.Any())
-                options = allItems.Where(f => f.Category.Equals(category, StringComparison.OrdinalIgnoreCase)).ToList();
+            if (!candidates.Any())
+            {
+                return new FoodItem
+                {
+                    Name = "No matching food found",
+                    Category = category,
+                    Calories = 0,
+                    Spiciness = "-",
+                    Description = "No items match your specific calorie and spiciness requirements."
+                };
+            }
 
-            // Fallback 2: Generate placeholder if catalog lacks this specific category
-            if (!options.Any())
-                return new FoodItem { Name = "No matching food found", Category = category, Calories = 0 };
-
-            return options[random.Next(options.Count)];
+            return candidates[random.Next(candidates.Count)];
         }
 
-        selectedPlan.Add(PickItemByCategory("Breakfast"));
-        selectedPlan.Add(PickItemByCategory("Lunch"));
-        selectedPlan.Add(PickItemByCategory("Dinner"));
-        selectedPlan.Add(PickItemByCategory("Drink"));
+        selectedPlan.Add(FindMatch("Breakfast", breakfastCalLimit));
+        selectedPlan.Add(FindMatch("Lunch", lunchCalLimit));
+        selectedPlan.Add(FindMatch("Dinner", dinnerCalLimit));
+        selectedPlan.Add(FindMatch("Drink", drinkCalLimit));
 
         return selectedPlan;
     }
