@@ -21,20 +21,39 @@ public static class FoodService
         if (_cachedFoods != null && _cachedFoods.Any())
             return _cachedFoods;
 
-        if (!MockApiConfig.IsConfigured || string.IsNullOrEmpty(MockApiConfig.EndpointUrl))
-            return new List<FoodItem>();
+        _cachedFoods = new List<FoodItem>();
+
+        if (MockApiConfig.IsConfigured && !string.IsNullOrEmpty(MockApiConfig.EndpointUrl))
+        {
+            try
+            {
+                var remoteItems = await HttpClient.GetFromJsonAsync<List<FoodItem>>(MockApiConfig.EndpointUrl);
+                if (remoteItems != null && remoteItems.Any())
+                {
+                    _cachedFoods = remoteItems;
+                    return _cachedFoods;
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
 
         try
         {
-            var remoteItems = await HttpClient.GetFromJsonAsync<List<FoodItem>>(MockApiConfig.EndpointUrl);
-            if (remoteItems != null)
+            using var stream = await FileSystem.OpenAppPackageFileAsync("Food.json");
+            using var reader = new StreamReader(stream);
+            var jsonContent = await reader.ReadToEndAsync();
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var localItems = JsonSerializer.Deserialize<List<FoodItem>>(jsonContent, options);
+
+            if (localItems != null)
             {
-                _cachedFoods = remoteItems;
+                _cachedFoods = localItems;
             }
         }
         catch (Exception)
         {
-            _cachedFoods = new List<FoodItem>();
         }
 
         return _cachedFoods ?? new List<FoodItem>();
@@ -115,6 +134,7 @@ public static class FoodService
             {
                 return new FoodItem
                 {
+                    Id = Guid.NewGuid().ToString("N"),
                     Name = "No match found",
                     Category = category,
                     Calories = 0,
@@ -162,67 +182,5 @@ public static class FoodService
         {
             return false;
         }
-    }
-
-    public static async Task<int> MigrateLocalDataToMockApiAsync(IProgress<double> progress)
-    {
-        if (!MockApiConfig.IsConfigured) return 0;
-
-        try
-        {
-            var existingItems = await HttpClient.GetFromJsonAsync<List<FoodItem>>(MockApiConfig.EndpointUrl);
-            if (existingItems != null && existingItems.Count > 0)
-            {
-                return -1;
-            }
-        }
-        catch (Exception)
-        {
-        }
-
-        int successCount = 0;
-        try
-        {
-            using var stream = await FileSystem.OpenAppPackageFileAsync("Food.json");
-            using var reader = new StreamReader(stream);
-            var jsonContent = await reader.ReadToEndAsync();
-
-            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-            var localItems = JsonSerializer.Deserialize<List<FoodItem>>(jsonContent, options);
-
-            if (localItems != null && localItems.Any())
-            {
-                int totalItems = localItems.Count;
-
-                for (int i = 0; i < totalItems; i++)
-                {
-                    var item = localItems[i];
-                    item.Id = null;
-
-                    try
-                    {
-                        var response = await HttpClient.PostAsJsonAsync(MockApiConfig.EndpointUrl, item);
-                        if (response.IsSuccessStatusCode)
-                        {
-                            successCount++;
-                        }
-                    }
-                    catch (Exception)
-                    {
-                    }
-
-                    double currentProgress = (double)(i + 1) / totalItems;
-                    progress?.Report(currentProgress);
-
-                    await Task.Delay(200);
-                }
-            }
-            _cachedFoods = null;
-        }
-        catch (Exception)
-        {
-        }
-
-        return successCount;
     }
 }

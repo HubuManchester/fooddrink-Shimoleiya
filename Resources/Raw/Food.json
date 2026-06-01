@@ -1,87 +1,60 @@
 [
   {
     "id": "f1",
-    "name": "Berry Oatmeal Bowl",
+    "name": "Classic Oatmeal",
     "category": "Breakfast",
-    "calories": 320,
+    "calories": 250,
     "spiciness": "Not Spicy",
-    "sweetness": "Medium Sweet",
-    "description": "Healthy and high protein breakfast option."
+    "sweetness": "Sugar Free",
+    "description": "Warm and hearty rolled oats, perfect for a clean start."
   },
   {
     "id": "f2",
-    "name": "Spicy Chicken Wrap",
+    "name": "Scrambled Eggs with Chives",
     "category": "Breakfast",
-    "calories": 450,
-    "spiciness": "Mild",
+    "calories": 210,
+    "spiciness": "Not Spicy",
     "sweetness": "Sugar Free",
-    "description": "Energetic wrap to start your morning."
+    "description": "Fluffy scrambled eggs topped with fresh herbs."
   },
   {
     "id": "f3",
-    "name": "Steamed Veggies & Brown Rice",
-    "category": "Lunch",
-    "calories": 480,
+    "name": "Blueberry Pancakes",
+    "category": "Breakfast",
+    "calories": 420,
     "spiciness": "Not Spicy",
-    "sweetness": "Sugar Free",
-    "description": "Low-fat and clean diet meal for fitness."
+    "sweetness": "Medium Sweet",
+    "description": "Three fluffy pancakes filled with fresh blueberries."
   },
   {
     "id": "f4",
-    "name": "Mapo Tofu Rice Bowl",
-    "category": "Lunch",
-    "calories": 620,
-    "spiciness": "Medium",
-    "sweetness": "Sugar Free",
-    "description": "Classic spicy Sichuan tofu served over hot rice."
+    "name": "Waffles with Syrup",
+    "category": "Breakfast",
+    "calories": 500,
+    "spiciness": "Not Spicy",
+    "sweetness": "Full Sugar",
+    "description": "Crispy golden waffles drizzled with rich maple syrup."
   },
   {
     "id": "f5",
-    "name": "Pan-Seared Salmon with Asparagus",
-    "category": "Dinner",
-    "calories": 410,
+    "name": "Bacon and Egg Sandwich",
+    "category": "Breakfast",
+    "calories": 450,
     "spiciness": "Not Spicy",
     "sweetness": "Sugar Free",
-    "description": "Premium fish fillet rich in Omega-3 fatty acids."
+    "description": "Crispy bacon and a fried egg on a toasted bun."
   },
   {
     "id": "f6",
-    "name": "Szechuan Poached Beef",
-    "category": "Dinner",
-    "calories": 750,
-    "spiciness": "Extra Spicy",
+    "name": "Avocado Toast",
+    "category": "Breakfast",
+    "calories": 320,
+    "spiciness": "Mild",
     "sweetness": "Sugar Free",
-    "description": "Very authentic, rich, and highly seasoned dish."
+    "description": "Mashed avocado on whole wheat toast with a pinch of chili flakes."
   },
   {
     "id": "f7",
-    "name": "Sugar-Free Green Tea",
-    "category": "Drink",
-    "calories": 0,
-    "spiciness": "Not Spicy",
-    "sweetness": "Sugar Free",
-    "description": "Refreshing, iced, and absolutely clean taste."
-  },
-  {
-    "id": "f8",
-    "name": "Sparkling Fruit Juice",
-    "category": "Drink",
-    "calories": 110,
-    "spiciness": "Not Spicy",
-    "sweetness": "Medium Sweet",
-    "description": "Slightly sweet and bubbly natural booster."
-  },
-  {
-    "id": "f9",
-    "name": "Avocado Toast with Egg",
-    "category": "Breakfast",
-    "calories": 380,
-    "spiciness": "Not Spicy",
-    "sweetness": "Sugar Free",
-    "description": "Whole wheat toast topped with mashed avocado and a fried egg."
-  },
-  {
-    "id": "f10",
     "name": "Spicy Breakfast Burrito",
     "category": "Breakfast",
     "calories": 550,
@@ -90,318 +63,660 @@
     "description": "Eggs, sausage, cheese, and jalapenos wrapped in a warm tortilla."
   },
   {
-    "id": "f11",
-    "name": "Pancakes with Maple Syrup",
+    "id": "f8",
+    "name": "French Toast",
     "category": "Breakfast",
-    "calories": 460,
+    "calories": 480,
     "spiciness": "Not Spicy",
-    "sweetness": "Full Sugar",
-    "description": "Fluffy classic pancakes served with butter and pure maple syrup."
+    "sweetness": "Medium Sweet",
+    "description": "Thick slices of bread soaked in egg and grilled, topped with powdered sugar."
   },
   {
-    "id": "f12",
-    "name": "Turkey Bacon Muffin",
+    "id": "f9",
+    "name": "Greek Yogurt Parfait",
+    "category": "Breakfast",
+    "calories": 280,
+    "spiciness": "Not Spicy",
+    "sweetness": "Medium Sweet",
+    "description": "Layers of creamy Greek yogurt, mixed berries, and granola."
+  },
+  {
+    "id": "f10",
+    "name": "Crispy Hash Browns",
     "category": "Breakfast",
     "calories": 310,
     "spiciness": "Not Spicy",
     "sweetness": "Sugar Free",
-    "description": "A lighter breakfast sandwich with turkey bacon and low-fat cheese."
+    "description": "Golden, pan-fried shredded potatoes."
+  },
+  {
+    "id": "f11",
+    "name": "Chocolate Chip Muffin",
+    "category": "Breakfast",
+    "calories": 390,
+    "spiciness": "Not Spicy",
+    "sweetness": "Full Sugar",
+    "description": "Freshly baked muffin loaded with chocolate chips."
+  },
+  {
+    "id": "f12",
+    "name": "Spinach and Feta Omelette",
+    "category": "Breakfast",
+    "calories": 340,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Three-egg omelette stuffed with fresh spinach and feta cheese."
   },
   {
     "id": "f13",
-    "name": "Spicy Tuna Roll",
-    "category": "Lunch",
-    "calories": 350,
-    "spiciness": "Medium",
-    "sweetness": "Sugar Free",
-    "description": "Fresh tuna mixed with spicy mayo wrapped in rice and seaweed."
+    "name": "Cinnamon Roll",
+    "category": "Breakfast",
+    "calories": 460,
+    "spiciness": "Not Spicy",
+    "sweetness": "Full Sugar",
+    "description": "Warm, gooey cinnamon roll topped with cream cheese icing."
   },
   {
     "id": "f14",
-    "name": "Grilled Chicken Salad",
-    "category": "Lunch",
-    "calories": 290,
+    "name": "Buttery Croissant",
+    "category": "Breakfast",
+    "calories": 270,
     "spiciness": "Not Spicy",
     "sweetness": "Sugar Free",
-    "description": "Mixed greens with grilled chicken breast and vinaigrette."
+    "description": "Flaky, buttery, traditional French pastry."
   },
   {
     "id": "f15",
-    "name": "Beef Noodle Soup",
-    "category": "Lunch",
-    "calories": 580,
-    "spiciness": "Mild",
+    "name": "Bagel with Cream Cheese",
+    "category": "Breakfast",
+    "calories": 350,
+    "spiciness": "Not Spicy",
     "sweetness": "Sugar Free",
-    "description": "Tender beef chunks and noodles in a rich, slightly spiced broth."
+    "description": "Toasted plain bagel generously smeared with cream cheese."
   },
   {
     "id": "f16",
-    "name": "Tom Yum Goong",
-    "category": "Lunch",
-    "calories": 420,
-    "spiciness": "Extra Spicy",
-    "sweetness": "Medium Sweet",
-    "description": "Famous Thai hot and sour prawn soup with lemongrass."
-  },
-  {
-    "id": "f17",
-    "name": "BLT Sandwich",
-    "category": "Lunch",
-    "calories": 450,
-    "spiciness": "Not Spicy",
-    "sweetness": "Sugar Free",
-    "description": "Classic Bacon, Lettuce, and Tomato sandwich on toasted bread."
-  },
-  {
-    "id": "f18",
-    "name": "Margherita Pizza",
-    "category": "Dinner",
-    "calories": 800,
-    "spiciness": "Not Spicy",
-    "sweetness": "Sugar Free",
-    "description": "Traditional Italian pizza with fresh tomatoes, mozzarella, and basil."
-  },
-  {
-    "id": "f19",
-    "name": "Spicy Pork Tacos",
-    "category": "Dinner",
-    "calories": 600,
-    "spiciness": "Medium",
-    "sweetness": "Sugar Free",
-    "description": "Three corn tortillas filled with marinated spicy pork and cilantro."
-  },
-  {
-    "id": "f20",
-    "name": "Vegetable Stir Fry",
-    "category": "Dinner",
-    "calories": 280,
-    "spiciness": "Mild",
-    "sweetness": "Sugar Free",
-    "description": "Mixed seasonal vegetables stir-fried with a hint of chili."
-  },
-  {
-    "id": "f21",
-    "name": "Steak and Sweet Potato Fries",
-    "category": "Dinner",
-    "calories": 850,
-    "spiciness": "Not Spicy",
-    "sweetness": "Sugar Free",
-    "description": "Grilled ribeye steak served with baked sweet potato fries."
-  },
-  {
-    "id": "f22",
-    "name": "Kung Pao Chicken",
-    "category": "Dinner",
-    "calories": 680,
-    "spiciness": "Extra Spicy",
-    "sweetness": "Medium Sweet",
-    "description": "Sichuan dish with chicken, peanuts, vegetables, and chili peppers."
-  },
-  {
-    "id": "f23",
-    "name": "Pad Thai",
-    "category": "Dinner",
-    "calories": 720,
-    "spiciness": "Medium",
-    "sweetness": "Medium Sweet",
-    "description": "Stir-fried rice noodle dish commonly served as street food in Thailand."
-  },
-  {
-    "id": "f24",
-    "name": "Iced Black Coffee",
-    "category": "Drink",
-    "calories": 5,
-    "spiciness": "Not Spicy",
-    "sweetness": "Sugar Free",
-    "description": "Chilled black coffee, perfect for a morning kick."
-  },
-  {
-    "id": "f25",
-    "name": "Mango Smoothie",
-    "category": "Drink",
-    "calories": 240,
-    "spiciness": "Not Spicy",
-    "sweetness": "Full Sugar",
-    "description": "Blended fresh mango with a splash of milk and ice."
-  },
-  {
-    "id": "f26",
-    "name": "Hot Chocolate",
-    "category": "Drink",
-    "calories": 300,
-    "spiciness": "Not Spicy",
-    "sweetness": "Full Sugar",
-    "description": "Rich and creamy hot chocolate topped with marshmallows."
-  },
-  {
-    "id": "f27",
-    "name": "Ginger Lemon Tea",
-    "category": "Drink",
-    "calories": 40,
-    "spiciness": "Mild",
-    "sweetness": "Medium Sweet",
-    "description": "Warm tea with a spicy ginger kick and refreshing lemon."
-  },
-  {
-    "id": "f28",
-    "name": "Coconut Water",
-    "category": "Drink",
-    "calories": 45,
-    "spiciness": "Not Spicy",
-    "sweetness": "Sugar Free",
-    "description": "100% natural coconut water, rich in electrolytes."
-  },
-  {
-    "id": "f29",
-    "name": "Protein Shake",
-    "category": "Drink",
+    "name": "Fruit Salad Bowl",
+    "category": "Breakfast",
     "calories": 180,
     "spiciness": "Not Spicy",
     "sweetness": "Medium Sweet",
-    "description": "Whey protein isolate mixed with almond milk."
+    "description": "A refreshing mix of seasonal fresh fruits."
   },
   {
-    "id": "f30",
-    "name": "Spicy Bloody Mary",
-    "category": "Drink",
-    "calories": 150,
-    "spiciness": "Extra Spicy",
-    "sweetness": "Sugar Free",
-    "description": "Tomato juice cocktail with a heavy dash of hot sauce."
-  },
-  {
-    "id": "f31",
-    "name": "Boiled Eggs and Almonds",
+    "id": "f17",
+    "name": "Spicy Sausage Links",
     "category": "Breakfast",
-    "calories": 250,
-    "spiciness": "Not Spicy",
-    "sweetness": "Sugar Free",
-    "description": "Two hard-boiled eggs with a handful of raw almonds."
-  },
-  {
-    "id": "f32",
-    "name": "Jalapeno Cheese Bagel",
-    "category": "Breakfast",
-    "calories": 400,
+    "calories": 380,
     "spiciness": "Mild",
     "sweetness": "Sugar Free",
-    "description": "Toasted bagel infused with jalapeno slices and cream cheese."
+    "description": "Four pan-fried pork sausage links with a hint of spice."
   },
   {
-    "id": "f33",
-    "name": "Quinoa Salad Bowl",
-    "category": "Lunch",
-    "calories": 380,
-    "spiciness": "Not Spicy",
-    "sweetness": "Sugar Free",
-    "description": "Nutrient-dense quinoa mixed with cherry tomatoes and feta."
-  },
-  {
-    "id": "f34",
-    "name": "Spicy Curry Udon",
-    "category": "Lunch",
-    "calories": 650,
-    "spiciness": "Extra Spicy",
-    "sweetness": "Sugar Free",
-    "description": "Thick wheat noodles in a fiery Japanese curry broth."
-  },
-  {
-    "id": "f35",
-    "name": "Lemon Herb Roast Chicken",
-    "category": "Dinner",
-    "calories": 550,
-    "spiciness": "Not Spicy",
-    "sweetness": "Sugar Free",
-    "description": "Half roast chicken marinated in lemon and Mediterranean herbs."
-  },
-  {
-    "id": "f36",
-    "name": "Buffalo Cauliflower Wings",
-    "category": "Dinner",
-    "calories": 320,
+    "id": "f18",
+    "name": "Shakshuka",
+    "category": "Breakfast",
+    "calories": 330,
     "spiciness": "Medium",
     "sweetness": "Sugar Free",
-    "description": "Roasted cauliflower florets tossed in spicy buffalo sauce."
+    "description": "Eggs poached in a spicy, flavorful tomato and pepper sauce."
   },
   {
-    "id": "f37",
-    "name": "Matcha Frappe",
-    "category": "Drink",
-    "calories": 280,
-    "spiciness": "Not Spicy",
-    "sweetness": "Full Sugar",
-    "description": "Ice-blended green tea beverage with whipped cream."
-  },
-  {
-    "id": "f38",
-    "name": "Chai Tea Latte",
-    "category": "Drink",
-    "calories": 200,
-    "spiciness": "Mild",
-    "sweetness": "Medium Sweet",
-    "description": "Spiced black tea combined with steamed milk."
-  },
-  {
-    "id": "f39",
-    "name": "Greek Yogurt Parfait",
+    "id": "f19",
+    "name": "Cornflakes with Milk",
     "category": "Breakfast",
     "calories": 220,
     "spiciness": "Not Spicy",
     "sweetness": "Medium Sweet",
-    "description": "Layered yogurt with granola and fresh strawberries."
+    "description": "Classic crunchy cornflakes served with cold milk."
   },
   {
-    "id": "f40",
-    "name": "Spicy Chorizo Hash",
+    "id": "f20",
+    "name": "Breakfast Quesadilla",
     "category": "Breakfast",
-    "calories": 580,
+    "calories": 410,
+    "spiciness": "Mild",
+    "sweetness": "Sugar Free",
+    "description": "Tortilla filled with melted cheese, scrambled eggs, and salsa."
+  },
+  {
+    "id": "f21",
+    "name": "Grilled Chicken Salad",
+    "category": "Lunch",
+    "calories": 350,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Mixed greens topped with sliced grilled chicken breast."
+  },
+  {
+    "id": "f22",
+    "name": "Classic Club Sandwich",
+    "category": "Lunch",
+    "calories": 520,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Triple-decker sandwich with turkey, bacon, lettuce, and tomato."
+  },
+  {
+    "id": "f23",
+    "name": "Cheeseburger",
+    "category": "Lunch",
+    "calories": 650,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Juicy beef patty with melted cheese, lettuce, and pickles."
+  },
+  {
+    "id": "f24",
+    "name": "Spicy Tuna Wrap",
+    "category": "Lunch",
+    "calories": 480,
     "spiciness": "Medium",
     "sweetness": "Sugar Free",
-    "description": "Diced potatoes pan-fried with spicy Spanish chorizo."
+    "description": "Tuna salad mixed with sriracha, wrapped with lettuce and tomatoes."
   },
   {
-    "id": "f41",
-    "name": "Caesar Salad with Prawns",
+    "id": "f25",
+    "name": "Tomato Basil Soup",
+    "category": "Lunch",
+    "calories": 280,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Rich and creamy tomato soup garnished with fresh basil."
+  },
+  {
+    "id": "f26",
+    "name": "Grilled Cheese Sandwich",
     "category": "Lunch",
     "calories": 410,
     "spiciness": "Not Spicy",
     "sweetness": "Sugar Free",
-    "description": "Crisp romaine lettuce, croutons, and grilled prawns."
+    "description": "Melted cheddar cheese between buttery toasted bread."
   },
   {
-    "id": "f42",
-    "name": "Kimchi Fried Rice",
+    "id": "f27",
+    "name": "Chicken Pad Thai",
     "category": "Lunch",
-    "calories": 520,
+    "calories": 580,
+    "spiciness": "Mild",
+    "sweetness": "Medium Sweet",
+    "description": "Classic Thai rice noodles stir-fried with chicken, peanuts, and lime."
+  },
+  {
+    "id": "f28",
+    "name": "Shrimp Fried Rice",
+    "category": "Lunch",
+    "calories": 540,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Wok-fried rice with tender shrimp, peas, and carrots."
+  },
+  {
+    "id": "f29",
+    "name": "California Sushi Roll",
+    "category": "Lunch",
+    "calories": 320,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Sushi roll filled with crab meat, avocado, and cucumber."
+  },
+  {
+    "id": "f30",
+    "name": "Spicy Beef Pho",
+    "category": "Lunch",
+    "calories": 490,
+    "spiciness": "Extra Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Vietnamese noodle soup with beef slices and an extra kick of chili."
+  },
+  {
+    "id": "f31",
+    "name": "Chicken Tacos",
+    "category": "Lunch",
+    "calories": 430,
     "spiciness": "Medium",
     "sweetness": "Sugar Free",
-    "description": "Korean style fried rice mixed with fermented spicy kimchi."
+    "description": "Three corn tortillas filled with seasoned chicken and pico de gallo."
   },
   {
-    "id": "f43",
-    "name": "Baked Cod Fish",
-    "category": "Dinner",
+    "id": "f32",
+    "name": "Cheese Quesadilla",
+    "category": "Lunch",
+    "calories": 390,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "A simple and delicious melted cheese quesadilla served with sour cream."
+  },
+  {
+    "id": "f33",
+    "name": "Beef Burrito Bowl",
+    "category": "Lunch",
+    "calories": 610,
+    "spiciness": "Mild",
+    "sweetness": "Sugar Free",
+    "description": "Rice, beans, seasoned beef, corn, and cheese."
+  },
+  {
+    "id": "f34",
+    "name": "Caprese Salad",
+    "category": "Lunch",
     "calories": 340,
     "spiciness": "Not Spicy",
     "sweetness": "Sugar Free",
-    "description": "Lean white fish baked with butter and dill."
+    "description": "Fresh mozzarella, tomatoes, and sweet basil drizzled with balsamic."
+  },
+  {
+    "id": "f35",
+    "name": "Falafel Wrap",
+    "category": "Lunch",
+    "calories": 470,
+    "spiciness": "Mild",
+    "sweetness": "Sugar Free",
+    "description": "Crispy falafel balls with hummus and veggies in a pita."
+  },
+  {
+    "id": "f36",
+    "name": "Chicken Gyro",
+    "category": "Lunch",
+    "calories": 520,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Greek pita wrap with marinated chicken, tzatziki, and onions."
+  },
+  {
+    "id": "f37",
+    "name": "Spicy Salmon Poke Bowl",
+    "category": "Lunch",
+    "calories": 550,
+    "spiciness": "Medium",
+    "sweetness": "Medium Sweet",
+    "description": "Fresh raw salmon marinated in spicy sauce over sushi rice."
+  },
+  {
+    "id": "f38",
+    "name": "Macaroni and Cheese",
+    "category": "Lunch",
+    "calories": 680,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Creamy, cheesy, baked comfort food."
+  },
+  {
+    "id": "f39",
+    "name": "Turkey BLT",
+    "category": "Lunch",
+    "calories": 490,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Sliced turkey breast with bacon, lettuce, and tomato."
+  },
+  {
+    "id": "f40",
+    "name": "Vegetarian Chili",
+    "category": "Lunch",
+    "calories": 310,
+    "spiciness": "Medium",
+    "sweetness": "Sugar Free",
+    "description": "Hearty bean and vegetable chili, slow-cooked to perfection."
+  },
+  {
+    "id": "f41",
+    "name": "Grilled Ribeye Steak",
+    "category": "Dinner",
+    "calories": 850,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Premium cut ribeye steak, grilled to your preference."
+  },
+  {
+    "id": "f42",
+    "name": "Lemon Herb Roast Chicken",
+    "category": "Dinner",
+    "calories": 520,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Half roast chicken marinated with lemon and rosemary."
+  },
+  {
+    "id": "f43",
+    "name": "Spaghetti and Meatballs",
+    "category": "Dinner",
+    "calories": 780,
+    "spiciness": "Mild",
+    "sweetness": "Sugar Free",
+    "description": "Classic Italian pasta with rich marinara and homemade meatballs."
   },
   {
     "id": "f44",
-    "name": "Vindaloo Curry",
+    "name": "Beef Lasagna",
     "category": "Dinner",
-    "calories": 820,
-    "spiciness": "Extra Spicy",
+    "calories": 710,
+    "spiciness": "Not Spicy",
     "sweetness": "Sugar Free",
-    "description": "Extremely hot Indian curry served with basmati rice."
+    "description": "Layers of pasta, ricotta, mozzarella, and hearty meat sauce."
   },
   {
     "id": "f45",
+    "name": "Pan-Seared Salmon",
+    "category": "Dinner",
+    "calories": 460,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Crispy skin salmon served with steamed asparagus."
+  },
+  {
+    "id": "f46",
+    "name": "Spicy Garlic Pork Chops",
+    "category": "Dinner",
+    "calories": 590,
+    "spiciness": "Medium",
+    "sweetness": "Sugar Free",
+    "description": "Tender pork chops pan-fried with garlic and chili flakes."
+  },
+  {
+    "id": "f47",
+    "name": "Hearty Beef Stew",
+    "category": "Dinner",
+    "calories": 450,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Slow-cooked beef with carrots, potatoes, and savory broth."
+  },
+  {
+    "id": "f48",
+    "name": "Chicken Tikka Masala",
+    "category": "Dinner",
+    "calories": 680,
+    "spiciness": "Medium",
+    "sweetness": "Sugar Free",
+    "description": "Roasted chicken chunks in a spicy, creamy tomato curry."
+  },
+  {
+    "id": "f49",
+    "name": "Steak Fajitas",
+    "category": "Dinner",
+    "calories": 640,
+    "spiciness": "Mild",
+    "sweetness": "Sugar Free",
+    "description": "Sizzling beef strips with bell peppers and onions, served with tortillas."
+  },
+  {
+    "id": "f50",
+    "name": "Pepperoni Pizza",
+    "category": "Dinner",
+    "calories": 890,
+    "spiciness": "Mild",
+    "sweetness": "Sugar Free",
+    "description": "Large slice of New York style pizza loaded with pepperoni."
+  },
+  {
+    "id": "f51",
+    "name": "Mushroom Risotto",
+    "category": "Dinner",
+    "calories": 530,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Creamy Arborio rice cooked with wild mushrooms and parmesan."
+  },
+  {
+    "id": "f52",
+    "name": "Grilled Lamb Chops",
+    "category": "Dinner",
+    "calories": 720,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Juicy lamb chops seasoned with garlic and mint."
+  },
+  {
+    "id": "f53",
+    "name": "Shrimp Scampi",
+    "category": "Dinner",
+    "calories": 560,
+    "spiciness": "Mild",
+    "sweetness": "Sugar Free",
+    "description": "Shrimp sautéed in garlic, butter, and white wine over linguine."
+  },
+  {
+    "id": "f54",
+    "name": "Eggplant Parmesan",
+    "category": "Dinner",
+    "calories": 480,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Breaded eggplant baked with marinara sauce and mozzarella."
+  },
+  {
+    "id": "f55",
+    "name": "Shepherd's Pie",
+    "category": "Dinner",
+    "calories": 600,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Ground lamb and vegetables topped with creamy mashed potatoes."
+  },
+  {
+    "id": "f56",
+    "name": "Extra Spicy Beef Chili",
+    "category": "Dinner",
+    "calories": 540,
+    "spiciness": "Extra Spicy",
+    "sweetness": "Sugar Free",
+    "description": "A bowl of fire-roasted chili for those who love the heat."
+  },
+  {
+    "id": "f57",
+    "name": "BBQ Pork Ribs",
+    "category": "Dinner",
+    "calories": 950,
+    "spiciness": "Mild",
+    "sweetness": "Medium Sweet",
+    "description": "Fall-off-the-bone ribs slathered in sweet and smoky BBQ sauce."
+  },
+  {
+    "id": "f58",
+    "name": "Classic Meatloaf",
+    "category": "Dinner",
+    "calories": 580,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Traditional baked meatloaf served with savory gravy."
+  },
+  {
+    "id": "f59",
+    "name": "Spicy Pork Tonkotsu Ramen",
+    "category": "Dinner",
+    "calories": 780,
+    "spiciness": "Extra Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Rich pork bone broth loaded with noodles, chashu, and chili oil."
+  },
+  {
+    "id": "f60",
+    "name": "Seafood Paella",
+    "category": "Dinner",
+    "calories": 620,
+    "spiciness": "Mild",
+    "sweetness": "Sugar Free",
+    "description": "Spanish rice dish packed with shrimp, mussels, and saffron."
+  },
+  {
+    "id": "f61",
+    "name": "Black Coffee",
+    "category": "Drink",
+    "calories": 5,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Freshly brewed, dark roast coffee. Pure energy."
+  },
+  {
+    "id": "f62",
+    "name": "Iced Latte",
+    "category": "Drink",
+    "calories": 120,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Chilled espresso poured over milk and ice."
+  },
+  {
+    "id": "f63",
+    "name": "Cappuccino",
+    "category": "Drink",
+    "calories": 140,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Equal parts espresso, steamed milk, and milk foam."
+  },
+  {
+    "id": "f64",
+    "name": "Green Tea",
+    "category": "Drink",
+    "calories": 0,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Warm and soothing traditional green tea."
+  },
+  {
+    "id": "f65",
+    "name": "Sweet Peach Iced Tea",
+    "category": "Drink",
+    "calories": 150,
+    "spiciness": "Not Spicy",
+    "sweetness": "Full Sugar",
+    "description": "Refreshing iced black tea sweetened with peach syrup."
+  },
+  {
+    "id": "f66",
     "name": "Fresh Orange Juice",
+    "category": "Drink",
+    "calories": 110,
+    "spiciness": "Not Spicy",
+    "sweetness": "Medium Sweet",
+    "description": "100% freshly squeezed orange juice."
+  },
+  {
+    "id": "f67",
+    "name": "Apple Juice",
     "category": "Drink",
     "calories": 120,
     "spiciness": "Not Spicy",
     "sweetness": "Medium Sweet",
-    "description": "Freshly squeezed juice with no added sugar."
+    "description": "Crisp and refreshing cold apple juice."
+  },
+  {
+    "id": "f68",
+    "name": "Lemonade",
+    "category": "Drink",
+    "calories": 140,
+    "spiciness": "Not Spicy",
+    "sweetness": "Full Sugar",
+    "description": "Sweet, tart, and icy cold homemade lemonade."
+  },
+  {
+    "id": "f69",
+    "name": "Classic Cola",
+    "category": "Drink",
+    "calories": 150,
+    "spiciness": "Not Spicy",
+    "sweetness": "Full Sugar",
+    "description": "Ice-cold sparkling cola beverage."
+  },
+  {
+    "id": "f70",
+    "name": "Diet Cola",
+    "category": "Drink",
+    "calories": 0,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "All the cola flavor with zero calories and zero sugar."
+  },
+  {
+    "id": "f71",
+    "name": "Sparkling Water",
+    "category": "Drink",
+    "calories": 0,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Crisp carbonated water with a slice of lemon."
+  },
+  {
+    "id": "f72",
+    "name": "Strawberry Smoothie",
+    "category": "Drink",
+    "calories": 250,
+    "spiciness": "Not Spicy",
+    "sweetness": "Medium Sweet",
+    "description": "Blended fresh strawberries, yogurt, and a touch of honey."
+  },
+  {
+    "id": "f73",
+    "name": "Vanilla Milkshake",
+    "category": "Drink",
+    "calories": 400,
+    "spiciness": "Not Spicy",
+    "sweetness": "Full Sugar",
+    "description": "Thick and creamy milkshake made with real vanilla ice cream."
+  },
+  {
+    "id": "f74",
+    "name": "Hot Chocolate",
+    "category": "Drink",
+    "calories": 320,
+    "spiciness": "Not Spicy",
+    "sweetness": "Full Sugar",
+    "description": "Rich hot cocoa topped with mini marshmallows."
+  },
+  {
+    "id": "f75",
+    "name": "Matcha Latte",
+    "category": "Drink",
+    "calories": 180,
+    "spiciness": "Not Spicy",
+    "sweetness": "Medium Sweet",
+    "description": "Finely ground green tea powder mixed with steamed milk."
+  },
+  {
+    "id": "f76",
+    "name": "Almond Milk",
+    "category": "Drink",
+    "calories": 40,
+    "spiciness": "Not Spicy",
+    "sweetness": "Sugar Free",
+    "description": "Unsweetened, dairy-free almond milk."
+  },
+  {
+    "id": "f77",
+    "name": "Coconut Water",
+    "category": "Drink",
+    "calories": 45,
+    "spiciness": "Not Spicy",
+    "sweetness": "Medium Sweet",
+    "description": "Naturally hydrating water from young green coconuts."
+  },
+  {
+    "id": "f78",
+    "name": "Ginger Ale",
+    "category": "Drink",
+    "calories": 130,
+    "spiciness": "Mild",
+    "sweetness": "Full Sugar",
+    "description": "Bubbly soft drink with a mild ginger kick."
+  },
+  {
+    "id": "f79",
+    "name": "Mango Lassi",
+    "category": "Drink",
+    "calories": 220,
+    "spiciness": "Not Spicy",
+    "sweetness": "Medium Sweet",
+    "description": "Traditional Indian yogurt-based drink blended with ripe mangoes."
+  },
+  {
+    "id": "f80",
+    "name": "Root Beer",
+    "category": "Drink",
+    "calories": 160,
+    "spiciness": "Not Spicy",
+    "sweetness": "Full Sugar",
+    "description": "Sweet, dark, and bubbly soda with a distinctive sassafras flavor."
   }
 ]

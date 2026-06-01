@@ -1,11 +1,9 @@
-using DailyFoodSetApp.Services;
-using Microsoft.Maui.ApplicationModel;
-using Microsoft.Maui.Controls;
-using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
-using Microsoft.Maui.Devices.Sensors;
-using Microsoft.Maui.Storage;
 using System;
-using System.Threading.Tasks;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Storage;
+using DailyFoodSetApp.Services;
+using Microsoft.Maui.Devices.Sensors;
 
 namespace DailyFoodSetApp.Views;
 
@@ -65,42 +63,6 @@ public partial class SettingsPage : ContentPage
         catch (Exception ex)
         {
             DisplayAlert("Oops!", $"Something went wrong: {ex.Message}", "Okay");
-        }
-    }
-
-    private async void OnUploadDataClicked(object sender, EventArgs e)
-    {
-        UploadDataButton.IsEnabled = false;
-        UploadProgressBar.IsVisible = true;
-        UploadStatusLabel.IsVisible = true;
-        UploadProgressBar.Progress = 0;
-        UploadStatusLabel.Text = "Getting ready to backup...";
-
-        var progressIndicator = new Progress<double>(value =>
-        {
-            UploadProgressBar.Progress = value;
-            UploadStatusLabel.Text = $"Backing up: {(value * 100):F0}%";
-        });
-
-        int result = await FoodService.MigrateLocalDataToMockApiAsync(progressIndicator);
-
-        if (result == -1)
-        {
-            UploadProgressBar.IsVisible = false;
-            UploadStatusLabel.Text = "Your backup is already up to date!";
-            await DisplayAlert("Cloud Sync", "Everything is already safely stored in the cloud. No need to backup again.", "Awesome");
-        }
-        else if (result > 0)
-        {
-            UploadStatusLabel.Text = $"Backed up {result} items successfully!";
-            await DisplayAlert("Cloud Sync", "All done! Your food list is now safely backed up.", "Awesome");
-        }
-        else
-        {
-            UploadProgressBar.IsVisible = false;
-            UploadStatusLabel.Text = "Backup failed. Please check your internet connection.";
-            await DisplayAlert("Cloud Sync", "We couldn't backup your data right now. Please make sure you are connected to the internet.", "Okay");
-            UploadDataButton.IsEnabled = true;
         }
     }
 }
