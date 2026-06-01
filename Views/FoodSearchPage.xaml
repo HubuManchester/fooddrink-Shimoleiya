@@ -3,7 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DailyFoodSetApp.Views.FoodSearchPage"
              BackgroundColor="{AppThemeBinding Light=#F5FFF5, Dark=#121212}"
-             Title="Food Catalog">
+             Title="Discover Food">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add Food" Clicked="OnAddToolbarItemClicked" Priority="0" />
+    </ContentPage.ToolbarItems>
+
     <Grid RowDefinitions="Auto, Auto, *">
 
         <Border Stroke="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}" 
@@ -15,15 +20,15 @@
                 <RoundRectangle CornerRadius="10"/>
             </Border.StrokeShape>
             <SearchBar x:Name="FoodSearchBar" 
-                       Placeholder="Search food name..." 
+                       Placeholder="What are you craving?" 
                        SearchButtonPressed="OnSearchPressed"
                        CancelButtonColor="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}"
                        TextColor="{AppThemeBinding Light=#333333, Dark=#FFFFFF}"
                        SemanticProperties.Hint="Type a name and press search" />
         </Border>
 
-        <Grid Grid.Row="1" ColumnDefinitions="*,*,*" ColumnSpacing="10" Margin="15,5,15,10">
-            <Border Grid.Column="0" 
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" RowDefinitions="Auto,Auto" ColumnSpacing="10" RowSpacing="10" Margin="15,5,15,10">
+            <Border Grid.Row="0" Grid.Column="0" 
                     Stroke="{AppThemeBinding Light=#A0D6B4, Dark=#2E8B57}" 
                     StrokeThickness="1" 
                     BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}">
@@ -36,16 +41,16 @@
                         TextColor="{AppThemeBinding Light=#333333, Dark=#FFFFFF}" 
                         SelectedIndexChanged="OnFilterChanged">
                     <Picker.Items>
-                        <x:String>All</x:String>
-                        <x:String>Breakfast</x:String>
-                        <x:String>Lunch</x:String>
-                        <x:String>Dinner</x:String>
-                        <x:String>Drink</x:String>
+                        <x:String>Category: All</x:String>
+                        <x:String>Category: Breakfast</x:String>
+                        <x:String>Category: Lunch</x:String>
+                        <x:String>Category: Dinner</x:String>
+                        <x:String>Category: Drink</x:String>
                     </Picker.Items>
                 </Picker>
             </Border>
 
-            <Border Grid.Column="1" 
+            <Border Grid.Row="0" Grid.Column="1" 
                     Stroke="{AppThemeBinding Light=#A0D6B4, Dark=#2E8B57}" 
                     StrokeThickness="1" 
                     BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}">
@@ -58,16 +63,16 @@
                         TextColor="{AppThemeBinding Light=#333333, Dark=#FFFFFF}" 
                         SelectedIndexChanged="OnFilterChanged">
                     <Picker.Items>
-                        <x:String>All</x:String>
-                        <x:String>Not Spicy</x:String>
-                        <x:String>Mild</x:String>
-                        <x:String>Medium</x:String>
-                        <x:String>Extra Spicy</x:String>
+                        <x:String>Spiciness: All</x:String>
+                        <x:String>Spiciness: Not Spicy</x:String>
+                        <x:String>Spiciness: Mild</x:String>
+                        <x:String>Spiciness: Medium</x:String>
+                        <x:String>Spiciness: Extra Spicy</x:String>
                     </Picker.Items>
                 </Picker>
             </Border>
 
-            <Border Grid.Column="2" 
+            <Border Grid.Row="1" Grid.Column="0" 
                     Stroke="{AppThemeBinding Light=#A0D6B4, Dark=#2E8B57}" 
                     StrokeThickness="1" 
                     BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}">
@@ -80,18 +85,38 @@
                         TextColor="{AppThemeBinding Light=#333333, Dark=#FFFFFF}" 
                         SelectedIndexChanged="OnFilterChanged">
                     <Picker.Items>
-                        <x:String>All</x:String>
-                        <x:String>0 - 300</x:String>
-                        <x:String>301 - 600</x:String>
-                        <x:String>600+</x:String>
+                        <x:String>Calories: All</x:String>
+                        <x:String>Calories: 0 - 300</x:String>
+                        <x:String>Calories: 301 - 600</x:String>
+                        <x:String>Calories: 600+</x:String>
+                    </Picker.Items>
+                </Picker>
+            </Border>
+
+            <Border Grid.Row="1" Grid.Column="1" 
+                    Stroke="{AppThemeBinding Light=#A0D6B4, Dark=#2E8B57}" 
+                    StrokeThickness="1" 
+                    BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8"/>
+                </Border.StrokeShape>
+                <Picker x:Name="SweetnessPicker" 
+                        Title="Sweetness" 
+                        FontSize="13" 
+                        TextColor="{AppThemeBinding Light=#333333, Dark=#FFFFFF}" 
+                        SelectedIndexChanged="OnFilterChanged">
+                    <Picker.Items>
+                        <x:String>Sweetness: All</x:String>
+                        <x:String>Sweetness: Sugar Free</x:String>
+                        <x:String>Sweetness: Medium Sweet</x:String>
+                        <x:String>Sweetness: Full Sugar</x:String>
                     </Picker.Items>
                 </Picker>
             </Border>
         </Grid>
 
-        <RefreshView Grid.Row="2" x:Name="FoodRefreshView" Refreshing="OnRefreshing" RefreshColor="#2E8B57">
+        <RefreshView Grid.Row="2" x:Name="FoodRefreshView" Refreshing="OnRefreshing" RefreshColor="#2E8B57" Margin="15,0,15,0">
             <CollectionView x:Name="FoodCollection" 
-                            Margin="15,0,15,0"
                             SelectionMode="None"
                             RemainingItemsThreshold="2"
                             RemainingItemsThresholdReached="OnLoadMore">
@@ -99,8 +124,8 @@
                 <CollectionView.EmptyView>
                     <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10" Margin="0,50,0,0">
                         <Label Text="🍽️" FontSize="48" HorizontalOptions="Center" />
-                        <Label Text="No matching food found" FontSize="18" TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}" FontAttributes="Bold" HorizontalOptions="Center" />
-                        <Label Text="Try adjusting your filters or search term." FontSize="14" TextColor="{AppThemeBinding Light=#999999, Dark=#777777}" HorizontalOptions="Center" />
+                        <Label Text="We couldn't find anything matching your search." FontSize="18" TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}" FontAttributes="Bold" HorizontalOptions="Center" />
+                        <Label Text="Try changing your filters or searching for something else." FontSize="14" TextColor="{AppThemeBinding Light=#999999, Dark=#777777}" HorizontalOptions="Center" />
                     </VerticalStackLayout>
                 </CollectionView.EmptyView>
 
@@ -119,6 +144,7 @@
                                 <HorizontalStackLayout Spacing="10">
                                     <Label Text="{Binding Category}" TextColor="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}" FontAttributes="Bold"/>
                                     <Label Text="{Binding Spiciness}" TextColor="#FF4500"/>
+                                    <Label Text="{Binding Sweetness}" TextColor="#D02090"/>
                                     <Label Text="{Binding CaloriesLabel}" TextColor="#FF8C00" FontAttributes="Bold"/>
                                 </HorizontalStackLayout>
 

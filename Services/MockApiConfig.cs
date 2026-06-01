@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-namespace DailyFoodSetApp.Services;
+﻿namespace DailyFoodSetApp.Services;
 
 public static class MockApiConfig
 {
-    public const string EndpointUrl = "";
+    public static bool IsConfigured { get; set; } = true;
 
-    public static bool IsConfigured => !string.IsNullOrWhiteSpace(EndpointUrl);
+    public static string EndpointUrl { get; set; } = "https://6a1ad633bc2f94475492b48b.mockapi.io/foods";
 }

@@ -15,11 +15,11 @@
                     <RoundRectangle CornerRadius="10"/>
                 </Border.StrokeShape>
                 <VerticalStackLayout Spacing="10">
-                    <Label Text="Appearance" 
+                    <Label Text="App Theme" 
                            FontSize="20" 
                            FontAttributes="Bold" 
                            TextColor="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}"/>
-                    <Label Text="Select your preferred application theme." 
+                    <Label Text="Choose how the app looks." 
                            FontSize="14" 
                            TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}"/>
 
@@ -45,11 +45,11 @@
                     <RoundRectangle CornerRadius="10"/>
                 </Border.StrokeShape>
                 <VerticalStackLayout Spacing="15">
-                    <Label Text="Accessibility" 
+                    <Label Text="Text Size" 
                            FontSize="20" 
                            FontAttributes="Bold" 
                            TextColor="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}"/>
-                    <Label Text="Adjust text scale for better readability." 
+                    <Label Text="Make the text larger or smaller to your liking." 
                            FontSize="14" 
                            TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}"/>
 
@@ -68,7 +68,7 @@
                             <RoundRectangle CornerRadius="8"/>
                         </Border.StrokeShape>
                         <Label x:Name="TextPreviewLabel" 
-                               Text="Font Size Preview" 
+                               Text="This is how your text will look." 
                                FontSize="16" 
                                FontAttributes="Bold"
                                TextColor="{AppThemeBinding Light=#333333, Dark=#FFFFFF}" 
@@ -85,18 +85,56 @@
                     <RoundRectangle CornerRadius="10"/>
                 </Border.StrokeShape>
                 <VerticalStackLayout Spacing="10">
-                    <Label Text="Device Feedback" 
+                    <Label Text="Vibration Test" 
                            FontSize="20" 
                            FontAttributes="Bold" 
                            TextColor="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}"/>
-                    <Label Text="Test the device vibration and haptic feedback." 
+                    <Label Text="Check if your device's vibration is working." 
                            FontSize="14" 
                            TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}"/>
-                    <Button Text="Trigger Vibration" 
+                    <Button Text="Test Vibration" 
                             BackgroundColor="#FF8C00" 
                             TextColor="White" 
                             FontAttributes="Bold" 
                             Clicked="OnVibrateClicked"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Stroke="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}" 
+                    StrokeThickness="2" 
+                    BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}" 
+                    Padding="15">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Cloud Sync" 
+                           FontSize="20" 
+                           FontAttributes="Bold" 
+                           TextColor="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}"/>
+                    <Label Text="Backup your offline food list to the cloud." 
+                           FontSize="14" 
+                           TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}"/>
+
+                    <ProgressBar x:Name="UploadProgressBar" 
+                                 Progress="0" 
+                                 ProgressColor="#FF8C00" 
+                                 IsVisible="False" 
+                                 Margin="0,10,0,10"/>
+
+                    <Label x:Name="UploadStatusLabel" 
+                           Text="" 
+                           FontSize="12" 
+                           TextColor="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}" 
+                           IsVisible="False"
+                           HorizontalOptions="Center"/>
+
+                    <Button x:Name="UploadDataButton" 
+                            Text="Backup Data Now" 
+                            BackgroundColor="#2E8B57" 
+                            TextColor="White" 
+                            FontAttributes="Bold" 
+                            Clicked="OnUploadDataClicked"/>
                 </VerticalStackLayout>
             </Border>
 

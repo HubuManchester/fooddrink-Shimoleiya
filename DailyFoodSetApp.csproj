@@ -58,6 +58,7 @@
 
 	<ItemGroup>
 	  <Compile Remove="Services\AccessibilityService.xaml.cs" />
+	  <Compile Remove="Services\FoodDataStore.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -83,6 +84,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\AddItemPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\FoodDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -1,22 +1,22 @@
-using DailyFoodSetApp.Models;
-using DailyFoodSetApp.Services;
+using System;
+using System.Threading.Tasks;
+using System.Threading;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Media;
-using Microsoft.Maui.Devices.Sensors;
-using System;
-using System.Threading;
+using DailyFoodSetApp.Models;
+using DailyFoodSetApp.Services;
 
 namespace DailyFoodSetApp.Views;
 
-[QueryProperty(nameof(FoodId), "id")]
+[QueryProperty(nameof(TargetFoodId), "id")]
 public partial class FoodDetailPage : ContentPage
 {
-    private CancellationTokenSource _speechTokenSource;
-    private FoodItem _currentFood;
+    private FoodItem currentTargetItem;
+    private CancellationTokenSource _ttsCts;
 
-    public string FoodId
+    public string TargetFoodId
     {
-        set => LoadFoodItem(value);
+        set => _ = FetchTargetNodeContextAsync(value);
     }
 
     public FoodDetailPage()
@@ -24,77 +24,71 @@ public partial class FoodDetailPage : ContentPage
         InitializeComponent();
     }
 
-    private async void LoadFoodItem(string id)
+    private async Task FetchTargetNodeContextAsync(string id)
     {
-        _currentFood = await FoodService.GetFoodByIdAsync(id);
-
-        if (_currentFood != null)
+        try
         {
-            NameLabel.Text = _currentFood.Name;
-            CategoryLabel.Text = _currentFood.Category;
-            CaloriesLabel.Text = _currentFood.CaloriesLabel;
-            SpicinessLabel.Text = _currentFood.Spiciness;
-            DescriptionLabel.Text = _currentFood.Description;
+            currentTargetItem = await FoodService.GetFoodByIdAsync(id);
+            if (currentTargetItem != null)
+            {
+                NameDisplay.Text = currentTargetItem.Name;
+                CategoryDisplay.Text = $"Category: {currentTargetItem.Category}";
+                CaloriesDisplay.Text = currentTargetItem.CaloriesLabel;
+                SpecsDisplay.Text = $"Spiciness: {currentTargetItem.Spiciness} | Sweetness: {currentTargetItem.Sweetness}";
+                DescriptionDisplay.Text = string.IsNullOrWhiteSpace(currentTargetItem.Description)
+                    ? "There are no details for this food yet."
+                    : currentTargetItem.Description;
+            }
+            else
+            {
+                NameDisplay.Text = "Oops! We couldn't find this food.";
+            }
+        }
+        catch (Exception)
+        {
         }
     }
 
-    protected override void OnAppearing()
+    private async void OnNarrateSummaryClicked(object sender, EventArgs e)
     {
-        base.OnAppearing();
-        DailyFoodSetApp.Services.AccessibilityService.ApplyFontScale(this);
-    }
+        if (currentTargetItem == null) return;
 
-    private async void OnReadClicked(object sender, EventArgs e)
-    {
-        if (_currentFood == null) return;
+        _ttsCts?.Cancel();
+        _ttsCts = new CancellationTokenSource();
 
-        HapticFeedback.Default.Perform(HapticFeedbackType.Click);
-        StopReading();
-
-        _speechTokenSource = new CancellationTokenSource();
-
-        string textToRead = $"{_currentFood.Name}. Category: {_currentFood.Category}. Calories: {_currentFood.Calories}. Spiciness level: {_currentFood.Spiciness}. Description: {_currentFood.Description}";
+        string audioScript = $"{currentTargetItem.Name}, categorized under {currentTargetItem.Category}. It has {currentTargetItem.Calories} calories. Spiciness is {currentTargetItem.Spiciness} and sweetness is {currentTargetItem.Sweetness}.";
 
         try
         {
-            await TextToSpeech.Default.SpeakAsync(textToRead, cancelToken: _speechTokenSource.Token);
+            await TextToSpeech.Default.SpeakAsync(audioScript, cancelToken: _ttsCts.Token);
         }
-        catch (OperationCanceledException)
+        catch (Exception)
         {
         }
     }
 
-    private async void OnStopReadClicked(object sender, EventArgs e)
+    private void OnStopNarratingClicked(object sender, EventArgs e)
     {
-        HapticFeedback.Default.Perform(HapticFeedbackType.Click);
-        StopReading();
-
-        SemanticScreenReader.Announce("Reading stopped explicitly.");
-
-        if (sender is Button btn)
-        {
-            string originalText = btn.Text;
-            btn.Text = "Stopped!";
-
-            await Task.Delay(1000);
-
-            btn.Text = originalText;
-        }
+        _ttsCts?.Cancel();
     }
 
-    private void StopReading()
+    private async void OnTerminateRecordClicked(object sender, EventArgs e)
     {
-        if (_speechTokenSource != null && !_speechTokenSource.IsCancellationRequested)
-        {
-            _speechTokenSource.Cancel();
-            _speechTokenSource.Dispose();
-            _speechTokenSource = null;
-        }
-    }
+        if (currentTargetItem == null) return;
 
-    protected override void OnDisappearing()
-    {
-        base.OnDisappearing();
-        StopReading();
+        bool approval = await DisplayAlert("Delete Food?", "Are you sure you want to remove this food? This cannot be undone.", "Yes, remove it", "No, keep it");
+        if (!approval) return;
+
+        bool operationResult = await FoodService.DeleteFoodFromApiAsync(currentTargetItem.Id);
+
+        if (operationResult)
+        {
+            await DisplayAlert("Deleted", "The food has been removed from your list.", "Okay");
+            await Shell.Current.GoToAsync("..");
+        }
+        else
+        {
+            await DisplayAlert("Oops!", "We couldn't delete this food right now. Please try again later.", "Okay");
+        }
     }
 }

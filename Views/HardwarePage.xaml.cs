@@ -1,168 +1,200 @@
 using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Maui.Media;
-using Microsoft.Maui.Devices.Sensors;
 using Microsoft.Maui.Controls;
-using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Devices;
+using Microsoft.Maui.Devices.Sensors;
+using Microsoft.Maui.Media;
+using Microsoft.Maui.Graphics;
 
 namespace DailyFoodSetApp.Views;
 
+public class SocialPost
+{
+    public string Id { get; set; } = Guid.NewGuid().ToString("N");
+    public string ImagePath { get; set; }
+    public string Description { get; set; }
+    public string LocationInfo { get; set; }
+
+    public bool HasImage => !string.IsNullOrEmpty(ImagePath);
+    public bool HasLocation => !string.IsNullOrWhiteSpace(LocationInfo);
+}
+
 public partial class HardwarePage : ContentPage
 {
+    public ObservableCollection<SocialPost> FeedPosts { get; set; } = new();
+
     private bool _isFlashlightOn = false;
-    private ImageSource _capturedImageSource;
-    private string _currentLocation = "Unknown Location";
+    private byte[] _currentImageBytes;
+    private string _currentLocationText;
 
     public HardwarePage()
     {
         InitializeComponent();
+        BindingContext = this;
     }
 
-    protected override void OnAppearing()
+    private void TriggerHapticFeedback()
     {
-        base.OnAppearing();
-        DailyFoodSetApp.Services.AccessibilityService.ApplyFontScale(this);
+        try
+        {
+            HapticFeedback.Default.Perform(HapticFeedbackType.Click);
+        }
+        catch { }
     }
 
-    private async void OnFlashlightClicked(object sender, EventArgs e)
+    private async void OnTakePhotoClicked(object sender, EventArgs e)
     {
+        TriggerHapticFeedback();
         try
         {
             if (_isFlashlightOn)
             {
                 await Flashlight.Default.TurnOffAsync();
                 _isFlashlightOn = false;
-                if (sender is Button btn) btn.Text = "Flashlight: Off";
-                SemanticScreenReader.Announce("Flashlight turned off.");
+                FlashlightButton.Text = "Turn On Flashlight";
+                FlashlightButton.BackgroundColor = Color.FromArgb("#512BD4");
+
+                await Task.Delay(300);
+            }
+
+            if (!MediaPicker.Default.IsCaptureSupported)
+            {
+                await DisplayAlert("Oops!", "It looks like your device doesn't support the camera.", "Okay");
+                return;
+            }
+
+            var photoResult = await MediaPicker.Default.CapturePhotoAsync();
+            if (photoResult != null)
+            {
+                await using var stream = await photoResult.OpenReadAsync();
+                using var memoryStream = new MemoryStream();
+                await stream.CopyToAsync(memoryStream);
+
+                _currentImageBytes = memoryStream.ToArray();
+                FoodPhoto.Source = ImageSource.FromStream(() => new MemoryStream(_currentImageBytes));
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Oops!", ex.Message, "Okay");
+        }
+    }
+
+    private async void OnToggleFlashlightClicked(object sender, EventArgs e)
+    {
+        TriggerHapticFeedback();
+        try
+        {
+            if (_isFlashlightOn)
+            {
+                await Flashlight.Default.TurnOffAsync();
+                _isFlashlightOn = false;
+                FlashlightButton.Text = "Turn On Flashlight";
+                FlashlightButton.BackgroundColor = Color.FromArgb("#512BD4");
             }
             else
             {
                 await Flashlight.Default.TurnOnAsync();
                 _isFlashlightOn = true;
-                if (sender is Button btn) btn.Text = "Flashlight: On";
-                SemanticScreenReader.Announce("Flashlight turned on.");
+                FlashlightButton.Text = "Turn Off Flashlight";
+                FlashlightButton.BackgroundColor = Color.FromArgb("#A95517");
             }
-        }
-        catch (FeatureNotSupportedException)
-        {
-            await DisplayAlert("Error", "Flashlight is not supported on this device.", "OK");
-        }
-        catch (PermissionException)
-        {
-            await DisplayAlert("Permission Denied", "Camera permission is required to use the flashlight.", "OK");
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error", $"An unexpected error occurred: {ex.Message}", "OK");
+            await DisplayAlert("Oops!", $"Flashlight issue: {ex.Message}", "Okay");
         }
     }
 
-    private async void OnTakePhotoClicked(object sender, EventArgs e)
+    private async void OnGetLocationClicked(object sender, EventArgs e)
     {
+        TriggerHapticFeedback();
         try
         {
-            if (MediaPicker.Default.IsCaptureSupported)
-            {
-                var photo = await MediaPicker.Default.CapturePhotoAsync();
+            var parameters = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+            var locationResult = await Geolocation.Default.GetLocationAsync(parameters);
 
-                if (photo != null)
+            if (locationResult != null)
+            {
+                CoordinateLabel.Text = $"Lat: {locationResult.Latitude:F5}, Lon: {locationResult.Longitude:F5}";
+
+                var placemarks = await Geocoding.Default.GetPlacemarksAsync(locationResult);
+                var mark = placemarks?.FirstOrDefault();
+
+                if (mark != null)
                 {
-                    var stream = await photo.OpenReadAsync();
-                    using var memoryStream = new MemoryStream();
-                    await stream.CopyToAsync(memoryStream);
-                    var imageBytes = memoryStream.ToArray();
-
-                    _capturedImageSource = ImageSource.FromStream(() => new MemoryStream(imageBytes));
-                    StatusLabel.Text = "Photo captured successfully.";
-                    SemanticScreenReader.Announce("Photo captured successfully.");
-                }
-            }
-            else
-            {
-                await DisplayAlert("Error", "Camera is not supported on this device.", "OK");
-            }
-        }
-        catch (PermissionException)
-        {
-            await DisplayAlert("Permission Denied", "Camera permission is required to take photos.", "OK");
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Error", $"An unexpected error occurred: {ex.Message}", "OK");
-        }
-    }
-
-    private async void OnLocateClicked(object sender, EventArgs e)
-    {
-        try
-        {
-            StatusLabel.Text = "Fetching location...";
-
-            var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
-            var location = await Geolocation.Default.GetLocationAsync(request);
-
-            if (location != null)
-            {
-                var placemarks = await Geocoding.Default.GetPlacemarksAsync(location);
-                var placemark = placemarks?.FirstOrDefault();
-
-                if (placemark != null)
-                {
-                    _currentLocation = $"{placemark.Locality}, {placemark.AdminArea}, {placemark.CountryName}";
+                    _currentLocationText = $"{mark.Locality}, {mark.AdminArea}, {mark.CountryName}";
                 }
                 else
                 {
-                    _currentLocation = $"Lat: {location.Latitude:F4}, Lon: {location.Longitude:F4}";
+                    _currentLocationText = $"Lat {locationResult.Latitude:F2}, Lon {locationResult.Longitude:F2}";
                 }
 
-                StatusLabel.Text = "Location retrieved successfully.";
-                SemanticScreenReader.Announce("Location successfully retrieved.");
-            }
-            else
-            {
-                StatusLabel.Text = "Unable to get location.";
+                LocationLabel.Text = _currentLocationText;
+                await DisplayAlert("Got it!", "Your location has been added to your post.", "Awesome");
             }
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error", $"Location error: {ex.Message}", "OK");
-            StatusLabel.Text = "Location error.";
+            await DisplayAlert("Oops!", "We couldn't get your location. Please check your device settings.", "Okay");
         }
     }
 
     private void OnShareClicked(object sender, EventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(CaloriesEntry.Text))
+        TriggerHapticFeedback();
+        string textContent = PostDescriptionEditor.Text?.Trim();
+
+        if (string.IsNullOrWhiteSpace(textContent) && _currentImageBytes == null)
         {
-            DisplayAlert("Validation Error", "Please enter the calories first.", "OK");
+            DisplayAlert("Almost there!", "Please add a photo or write something before sharing.", "Okay");
             return;
         }
 
-        if (_capturedImageSource == null)
+        string savedImagePath = null;
+        if (_currentImageBytes != null)
         {
-            DisplayAlert("Validation Error", "Please take a photo before sharing.", "OK");
-            return;
+            savedImagePath = Path.Combine(FileSystem.CacheDirectory, $"post_{Guid.NewGuid():N}.jpg");
+            File.WriteAllBytes(savedImagePath, _currentImageBytes);
         }
 
-        // Populate the card
-        PostImage.Source = _capturedImageSource;
-        PostCaloriesLabel.Text = $"{CaloriesEntry.Text} kcal";
-        PostLocationLabel.Text = _currentLocation;
-        PostTimeLabel.Text = DateTime.Now.ToString("f");
-
-        PostCard.IsVisible = true;
-        StatusLabel.Text = "Shared!";
-        SemanticScreenReader.Announce("Post generated successfully.");
-
-        // Ensure the new card inherits the global font scale
-        Task.Delay(100).ContinueWith(_ =>
+        var newPost = new SocialPost
         {
-            MainThread.BeginInvokeOnMainThread(() =>
+            Description = string.IsNullOrWhiteSpace(textContent) ? "Enjoying a great meal!" : textContent,
+            LocationInfo = _currentLocationText,
+            ImagePath = savedImagePath
+        };
+
+        FeedPosts.Insert(0, newPost);
+
+        PostDescriptionEditor.Text = string.Empty;
+        FoodPhoto.Source = null;
+        _currentImageBytes = null;
+        CoordinateLabel.Text = "Location not added yet";
+        LocationLabel.Text = "Tap the button above to add your location.";
+        _currentLocationText = null;
+    }
+
+    private async void OnDeletePostClicked(object sender, EventArgs e)
+    {
+        TriggerHapticFeedback();
+        if (sender is Button triggerButton && triggerButton.CommandParameter is string targetId)
+        {
+            bool confirm = await DisplayAlert("Remove Post?", "Are you sure you want to delete this post? It will be gone forever.", "Yes, remove it", "No, keep it");
+            if (!confirm) return;
+
+            var postToRemove = FeedPosts.FirstOrDefault(p => p.Id == targetId);
+            if (postToRemove != null)
             {
-                DailyFoodSetApp.Services.AccessibilityService.ApplyFontScale(this);
-            });
-        });
+                if (!string.IsNullOrEmpty(postToRemove.ImagePath) && File.Exists(postToRemove.ImagePath))
+                {
+                    try { File.Delete(postToRemove.ImagePath); } catch { }
+                }
+                FeedPosts.Remove(postToRemove);
+            }
+        }
     }
 }

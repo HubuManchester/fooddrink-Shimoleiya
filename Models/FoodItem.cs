@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Text.Json.Serialization;
 
 namespace DailyFoodSetApp.Models;
@@ -16,18 +12,20 @@ public class FoodItem
     public string Name { get; set; } = string.Empty;
 
     [JsonPropertyName("category")]
-    public string Category { get; set; } = string.Empty; // Breakfast, Lunch, Dinner, Drink
+    public string Category { get; set; } = string.Empty;
 
     [JsonPropertyName("calories")]
     public int Calories { get; set; }
 
     [JsonPropertyName("spiciness")]
-    public string Spiciness { get; set; } = "Not Spicy"; // Not Spicy, Mild, Medium, Extra Spicy
+    public string Spiciness { get; set; } = "Not Spicy";
+
+    [JsonPropertyName("sweetness")]
+    public string Sweetness { get; set; } = "Sugar Free";
 
     [JsonPropertyName("description")]
     public string Description { get; set; } = string.Empty;
 
-    // Read-only helper property for UI formatting
     [JsonIgnore]
     public string CaloriesLabel => $"{Calories} kcal";
 }

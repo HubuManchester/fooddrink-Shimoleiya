@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DailyFoodSetApp.Views.AddItemPage"
+             Title="Add a New Food">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label Text="Let's add something delicious!" FontSize="22" FontAttributes="Bold" />
+
+            <Entry x:Name="NameEntry" Placeholder="What is the food called?" />
+
+            <Entry x:Name="CaloriesEntry" Placeholder="How many calories?" Keyboard="Numeric" />
+
+            <Picker x:Name="SpicinessPicker" Title="How spicy is it?">
+                <Picker.Items>
+                    <x:String>Not Spicy</x:String>
+                    <x:String>Mild</x:String>
+                    <x:String>Medium</x:String>
+                    <x:String>Extra Spicy</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Picker x:Name="SweetnessPicker" Title="How sweet is it?">
+                <Picker.Items>
+                    <x:String>Sugar Free</x:String>
+                    <x:String>Medium Sweet</x:String>
+                    <x:String>Full Sugar</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Picker x:Name="CategoryPicker" Title="What type of food is this?">
+                <Picker.Items>
+                    <x:String>Breakfast</x:String>
+                    <x:String>Lunch</x:String>
+                    <x:String>Dinner</x:String>
+                    <x:String>Drink</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Editor x:Name="DescriptionEditor" Placeholder="Tell us more about it..." HeightRequest="110" />
+
+            <Button Text="Save Food" Clicked="OnSubmitButtonClicked" BackgroundColor="#512BD4" TextColor="White" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

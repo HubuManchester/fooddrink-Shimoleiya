@@ -1,11 +1,12 @@
-﻿using System;
+﻿using DailyFoodSetApp.Models;
+using DailyFoodSetApp.Services;
+using Microsoft.Maui.Controls;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
-using Microsoft.Maui.Controls;
-using DailyFoodSetApp.Models;
-using DailyFoodSetApp.Services;
 
 namespace DailyFoodSetApp.Views;
 
@@ -28,6 +29,7 @@ public partial class FoodSearchPage : ContentPage
         CategoryPicker.SelectedIndex = 0;
         SpicinessPicker.SelectedIndex = 0;
         CaloriesPicker.SelectedIndex = 0;
+        SweetnessPicker.SelectedIndex = 0;
 
         _isInitializing = false;
     }
@@ -49,6 +51,10 @@ public partial class FoodSearchPage : ContentPage
     {
         await LoadDataAsync(false);
     }
+    private async void OnAddToolbarItemClicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync(nameof(AddItemPage));
+    }
 
     private async Task LoadDataAsync(bool isLoadMore)
     {
@@ -60,19 +66,29 @@ public partial class FoodSearchPage : ContentPage
             var query = FoodSearchBar.Text ?? string.Empty;
             var results = await FoodService.SearchFoodsAsync(query);
 
-            var category = CategoryPicker.SelectedItem?.ToString();
+            var categoryRaw = CategoryPicker.SelectedItem?.ToString();
+            var category = categoryRaw?.Replace("Category: ", "");
             if (!string.IsNullOrEmpty(category) && category != "All")
             {
                 results = results.Where(f => f.Category.Equals(category, StringComparison.OrdinalIgnoreCase)).ToList();
             }
 
-            var spiciness = SpicinessPicker.SelectedItem?.ToString();
+            var spicinessRaw = SpicinessPicker.SelectedItem?.ToString();
+            var spiciness = spicinessRaw?.Replace("Spiciness: ", "");
             if (!string.IsNullOrEmpty(spiciness) && spiciness != "All")
             {
                 results = results.Where(f => f.Spiciness.Equals(spiciness, StringComparison.OrdinalIgnoreCase)).ToList();
             }
 
-            var calRange = CaloriesPicker.SelectedItem?.ToString();
+            var sweetnessRaw = SweetnessPicker.SelectedItem?.ToString();
+            var sweetness = sweetnessRaw?.Replace("Sweetness: ", "");
+            if (!string.IsNullOrEmpty(sweetness) && sweetness != "All")
+            {
+                results = results.Where(f => f.Sweetness.Equals(sweetness, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            var calRangeRaw = CaloriesPicker.SelectedItem?.ToString();
+            var calRange = calRangeRaw?.Replace("Calories: ", "");
             if (!string.IsNullOrEmpty(calRange) && calRange != "All")
             {
                 if (calRange == "0 - 300")
@@ -108,7 +124,7 @@ public partial class FoodSearchPage : ContentPage
     {
         await LoadDataAsync(false);
         FoodRefreshView.IsRefreshing = false;
-        SemanticScreenReader.Announce("List refreshed.");
+        SemanticScreenReader.Announce("Food list has been refreshed.");
     }
 
     private async void OnLoadMore(object sender, EventArgs e)
