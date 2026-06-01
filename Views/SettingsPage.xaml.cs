@@ -3,6 +3,7 @@ using Microsoft.Maui.Controls;
 using Microsoft.Maui.ApplicationModel;
 using Microsoft.Maui.Storage;
 using DailyFoodSetApp.Services;
+using Microsoft.Maui.Devices.Sensors;
 
 namespace DailyFoodSetApp.Views;
 
@@ -45,6 +46,24 @@ public partial class SettingsPage : ContentPage
     {
         AccessibilityService.CurrentFontScale = e.NewValue;
         AccessibilityService.ApplyFontScale(this);
+    }
+
+    private void OnVibrateClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(500));
+            HapticFeedback.Default.Perform(HapticFeedbackType.LongPress);
+            SemanticScreenReader.Announce("Device vibrated.");
+        }
+        catch (FeatureNotSupportedException)
+        {
+            DisplayAlert("Error", "Vibration is not supported on this device.", "OK");
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("Error", $"An unexpected error occurred: {ex.Message}", "OK");
+        }
     }
 
 }

@@ -77,6 +77,29 @@
                 </VerticalStackLayout>
             </Border>
 
+            <Border Stroke="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}" 
+                    StrokeThickness="2" 
+                    BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}" 
+                    Padding="15">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Device Feedback" 
+                           FontSize="20" 
+                           FontAttributes="Bold" 
+                           TextColor="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}"/>
+                    <Label Text="Test the device vibration and haptic feedback." 
+                           FontSize="14" 
+                           TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}"/>
+                    <Button Text="Trigger Vibration" 
+                            BackgroundColor="#FF8C00" 
+                            TextColor="White" 
+                            FontAttributes="Bold" 
+                            Clicked="OnVibrateClicked"/>
+                </VerticalStackLayout>
+            </Border>
+
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

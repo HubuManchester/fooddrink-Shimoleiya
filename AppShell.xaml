@@ -15,7 +15,7 @@
     <TabBar>
         <ShellContent Title="Generator" ContentTemplate="{DataTemplate views:MealGeneratorPage}" />
         <ShellContent Title="Catalog" ContentTemplate="{DataTemplate views:FoodSearchPage}" />
-        <ShellContent Title="Hardware" ContentTemplate="{DataTemplate views:HardwarePage}" />
+        <ShellContent Title="Daily Share" ContentTemplate="{DataTemplate views:HardwarePage}" />
         <ShellContent Title="Settings" ContentTemplate="{DataTemplate views:SettingsPage}" />
     </TabBar>
 </Shell>

@@ -2,9 +2,9 @@ using DailyFoodSetApp.Models;
 using DailyFoodSetApp.Services;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Media;
+using Microsoft.Maui.Devices.Sensors;
 using System;
 using System.Threading;
-using System.Xml;
 
 namespace DailyFoodSetApp.Views;
 
@@ -37,6 +37,7 @@ public partial class FoodDetailPage : ContentPage
             DescriptionLabel.Text = _currentFood.Description;
         }
     }
+
     protected override void OnAppearing()
     {
         base.OnAppearing();
@@ -47,6 +48,7 @@ public partial class FoodDetailPage : ContentPage
     {
         if (_currentFood == null) return;
 
+        HapticFeedback.Default.Perform(HapticFeedbackType.Click);
         StopReading();
 
         _speechTokenSource = new CancellationTokenSource();
@@ -64,6 +66,7 @@ public partial class FoodDetailPage : ContentPage
 
     private async void OnStopReadClicked(object sender, EventArgs e)
     {
+        HapticFeedback.Default.Perform(HapticFeedbackType.Click);
         StopReading();
 
         SemanticScreenReader.Announce("Reading stopped explicitly.");
