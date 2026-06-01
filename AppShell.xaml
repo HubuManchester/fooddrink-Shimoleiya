@@ -5,12 +5,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:DailyFoodSetApp.Views"
     Title="Daily Meal Planner"
-    Shell.BackgroundColor="#FFFFFF"
-    Shell.ForegroundColor="#2E8B57"
-    Shell.TitleColor="#2E8B57"
-    Shell.TabBarBackgroundColor="#FFFFFF"
-    Shell.TabBarTitleColor="#2E8B57"
-    Shell.TabBarUnselectedColor="#A0D6B4">
+    Shell.BackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#121212}"
+    Shell.ForegroundColor="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}"
+    Shell.TitleColor="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}"
+    Shell.TabBarBackgroundColor="{AppThemeBinding Light=#FFFFFF, Dark=#1E1E1E}"
+    Shell.TabBarTitleColor="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}"
+    Shell.TabBarUnselectedColor="{AppThemeBinding Light=#A0D6B4, Dark=#555555}">
 
     <TabBar>
         <ShellContent Title="Generator" ContentTemplate="{DataTemplate views:MealGeneratorPage}" />

@@ -2,10 +2,48 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DailyFoodSetApp.Views.HardwarePage"
-             BackgroundColor="#F5FFF5"
+             BackgroundColor="{AppThemeBinding Light=#F5FFF5, Dark=#121212}"
              Title="Hardware Demo">
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="20">
 
-    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <Label Text="Under Construction..." FontSize="24" TextColor="#2E8B57" FontAttributes="Bold" />
-    </VerticalStackLayout>
+            <Border Stroke="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}" 
+                    StrokeThickness="2" 
+                    BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}" 
+                    Padding="15">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Camera Integration" 
+                           FontSize="20" 
+                           FontAttributes="Bold" 
+                           TextColor="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}"/>
+                    <Label Text="Take a photo of your meal directly from the application." 
+                           FontSize="14" 
+                           TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}"/>
+
+                    <Button Text="Take Photo" 
+                            BackgroundColor="#2E8B57" 
+                            TextColor="White" 
+                            FontAttributes="Bold" 
+                            Clicked="OnTakePhotoClicked"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Stroke="{AppThemeBinding Light=#A0D6B4, Dark=#2E8B57}" 
+                    StrokeThickness="1" 
+                    BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}" 
+                    Padding="10" 
+                    HeightRequest="300">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="8"/>
+                </Border.StrokeShape>
+                <Image x:Name="CapturedImage" 
+                       Aspect="AspectFit" 
+                       SemanticProperties.Description="Captured photo preview" />
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

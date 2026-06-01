@@ -2,27 +2,39 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DailyFoodSetApp.Views.FoodSearchPage"
-             BackgroundColor="#F5FFF5"
-             Title="Food Search">
+             BackgroundColor="{AppThemeBinding Light=#F5FFF5, Dark=#121212}"
+             Title="Food Catalog">
     <Grid RowDefinitions="Auto, Auto, *">
 
-        <Border Stroke="#2E8B57" StrokeThickness="2" BackgroundColor="White" Padding="0" Margin="15,15,15,5">
+        <Border Stroke="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}" 
+                StrokeThickness="2" 
+                BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}" 
+                Padding="0" 
+                Margin="15,15,15,5">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="10"/>
             </Border.StrokeShape>
             <SearchBar x:Name="FoodSearchBar" 
                        Placeholder="Search food name..." 
                        SearchButtonPressed="OnSearchPressed"
-                       CancelButtonColor="#2E8B57"
+                       CancelButtonColor="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}"
+                       TextColor="{AppThemeBinding Light=#333333, Dark=#FFFFFF}"
                        SemanticProperties.Hint="Type a name and press search" />
         </Border>
 
         <Grid Grid.Row="1" ColumnDefinitions="*,*,*" ColumnSpacing="10" Margin="15,5,15,10">
-            <Border Grid.Column="0" Stroke="#A0D6B4" StrokeThickness="1" BackgroundColor="White">
+            <Border Grid.Column="0" 
+                    Stroke="{AppThemeBinding Light=#A0D6B4, Dark=#2E8B57}" 
+                    StrokeThickness="1" 
+                    BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="8"/>
                 </Border.StrokeShape>
-                <Picker x:Name="CategoryPicker" Title="Category" FontSize="13" TextColor="#333333" SelectedIndexChanged="OnFilterChanged">
+                <Picker x:Name="CategoryPicker" 
+                        Title="Category" 
+                        FontSize="13" 
+                        TextColor="{AppThemeBinding Light=#333333, Dark=#FFFFFF}" 
+                        SelectedIndexChanged="OnFilterChanged">
                     <Picker.Items>
                         <x:String>All</x:String>
                         <x:String>Breakfast</x:String>
@@ -33,11 +45,18 @@
                 </Picker>
             </Border>
 
-            <Border Grid.Column="1" Stroke="#A0D6B4" StrokeThickness="1" BackgroundColor="White">
+            <Border Grid.Column="1" 
+                    Stroke="{AppThemeBinding Light=#A0D6B4, Dark=#2E8B57}" 
+                    StrokeThickness="1" 
+                    BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="8"/>
                 </Border.StrokeShape>
-                <Picker x:Name="SpicinessPicker" Title="Spiciness" FontSize="13" TextColor="#333333" SelectedIndexChanged="OnFilterChanged">
+                <Picker x:Name="SpicinessPicker" 
+                        Title="Spiciness" 
+                        FontSize="13" 
+                        TextColor="{AppThemeBinding Light=#333333, Dark=#FFFFFF}" 
+                        SelectedIndexChanged="OnFilterChanged">
                     <Picker.Items>
                         <x:String>All</x:String>
                         <x:String>Not Spicy</x:String>
@@ -48,11 +67,18 @@
                 </Picker>
             </Border>
 
-            <Border Grid.Column="2" Stroke="#A0D6B4" StrokeThickness="1" BackgroundColor="White">
+            <Border Grid.Column="2" 
+                    Stroke="{AppThemeBinding Light=#A0D6B4, Dark=#2E8B57}" 
+                    StrokeThickness="1" 
+                    BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="8"/>
                 </Border.StrokeShape>
-                <Picker x:Name="CaloriesPicker" Title="Calories" FontSize="13" TextColor="#333333" SelectedIndexChanged="OnFilterChanged">
+                <Picker x:Name="CaloriesPicker" 
+                        Title="Calories" 
+                        FontSize="13" 
+                        TextColor="{AppThemeBinding Light=#333333, Dark=#FFFFFF}" 
+                        SelectedIndexChanged="OnFilterChanged">
                     <Picker.Items>
                         <x:String>All</x:String>
                         <x:String>0 - 300</x:String>
@@ -73,25 +99,41 @@
                 <CollectionView.EmptyView>
                     <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10" Margin="0,50,0,0">
                         <Label Text="🍽️" FontSize="48" HorizontalOptions="Center" />
-                        <Label Text="没有查询到匹配的菜品" FontSize="18" TextColor="#666666" FontAttributes="Bold" HorizontalOptions="Center" />
-                        <Label Text="Try adjusting your filters or search term." FontSize="14" TextColor="#999999" HorizontalOptions="Center" />
+                        <Label Text="No matching food found" FontSize="18" TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}" FontAttributes="Bold" HorizontalOptions="Center" />
+                        <Label Text="Try adjusting your filters or search term." FontSize="14" TextColor="{AppThemeBinding Light=#999999, Dark=#777777}" HorizontalOptions="Center" />
                     </VerticalStackLayout>
                 </CollectionView.EmptyView>
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Border Stroke="#A0D6B4" StrokeThickness="1" BackgroundColor="White" Padding="15" Margin="0,0,0,10">
+                        <Border Stroke="{AppThemeBinding Light=#A0D6B4, Dark=#2E8B57}" 
+                                StrokeThickness="1" 
+                                BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}" 
+                                Padding="15" 
+                                Margin="0,0,0,10">
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="8"/>
                             </Border.StrokeShape>
                             <VerticalStackLayout Spacing="5">
-                                <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold" TextColor="#333333" SemanticProperties.HeadingLevel="Level2"/>
+                                <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold" TextColor="{AppThemeBinding Light=#333333, Dark=#FFFFFF}" SemanticProperties.HeadingLevel="Level2"/>
                                 <HorizontalStackLayout Spacing="10">
-                                    <Label Text="{Binding Category}" TextColor="#2E8B57" FontAttributes="Bold"/>
+                                    <Label Text="{Binding Category}" TextColor="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}" FontAttributes="Bold"/>
                                     <Label Text="{Binding Spiciness}" TextColor="#FF4500"/>
                                     <Label Text="{Binding CaloriesLabel}" TextColor="#FF8C00" FontAttributes="Bold"/>
                                 </HorizontalStackLayout>
-                                <Label Text="{Binding Description}" FontSize="12" TextColor="#666666"/>
+
+                                <Grid ColumnDefinitions="*, Auto" Margin="0,5,0,0">
+                                    <Label Text="{Binding Description}" FontSize="12" TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}" VerticalOptions="Center"/>
+                                    <Button Grid.Column="1" 
+                                            Text="Details" 
+                                            Padding="15,5" 
+                                            HeightRequest="35"
+                                            BackgroundColor="#2E8B57" 
+                                            TextColor="White" 
+                                            FontAttributes="Bold"
+                                            CommandParameter="{Binding Id}"
+                                            Clicked="OnDetailsClicked"/>
+                                </Grid>
                             </VerticalStackLayout>
                         </Border>
                     </DataTemplate>

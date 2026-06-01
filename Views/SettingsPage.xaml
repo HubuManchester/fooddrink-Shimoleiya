@@ -1,11 +1,82 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DailyFoodSetApp.Views.SettingsPage" 
-             BackgroundColor="#F5FFF5"
-             Title="Setting Demo">
+             x:Class="DailyFoodSetApp.Views.SettingsPage"
+             BackgroundColor="{AppThemeBinding Light=#F5FFF5, Dark=#121212}"
+             Title="Settings">
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="20">
 
-    <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <Label Text="Under Construction..." FontSize="24" TextColor="#2E8B57" FontAttributes="Bold" />
-    </VerticalStackLayout>
+            <Border Stroke="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}" 
+                    StrokeThickness="2" 
+                    BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}" 
+                    Padding="15">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="Appearance" 
+                           FontSize="20" 
+                           FontAttributes="Bold" 
+                           TextColor="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}"/>
+                    <Label Text="Select your preferred application theme." 
+                           FontSize="14" 
+                           TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}"/>
+
+                    <Picker x:Name="ThemePicker" 
+                            Title="Select Theme"
+                            TextColor="{AppThemeBinding Light=#333333, Dark=#FFFFFF}"
+                            TitleColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}"
+                            SelectedIndexChanged="OnThemeChanged">
+                        <Picker.Items>
+                            <x:String>System Default</x:String>
+                            <x:String>Light Mode</x:String>
+                            <x:String>Dark Mode</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border Stroke="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}" 
+                    StrokeThickness="2" 
+                    BackgroundColor="{AppThemeBinding Light=White, Dark=#1E1E1E}" 
+                    Padding="15">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="10"/>
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="15">
+                    <Label Text="Accessibility" 
+                           FontSize="20" 
+                           FontAttributes="Bold" 
+                           TextColor="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}"/>
+                    <Label Text="Adjust text scale for better readability." 
+                           FontSize="14" 
+                           TextColor="{AppThemeBinding Light=#666666, Dark=#AAAAAA}"/>
+
+                    <Slider x:Name="FontSizeSlider" 
+                            Minimum="1.0" 
+                            Maximum="1.8" 
+                            Value="1.0" 
+                            MinimumTrackColor="{AppThemeBinding Light=#2E8B57, Dark=#A0D6B4}" 
+                            MaximumTrackColor="{AppThemeBinding Light=#A0D6B4, Dark=#2E8B57}"
+                            ValueChanged="OnFontSizeChanged"/>
+
+                    <Border BackgroundColor="{AppThemeBinding Light=#E8F5E9, Dark=#2C3E30}" 
+                            StrokeThickness="0" 
+                            Padding="15">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8"/>
+                        </Border.StrokeShape>
+                        <Label x:Name="TextPreviewLabel" 
+                               Text="Font Size Preview" 
+                               FontSize="16" 
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#333333, Dark=#FFFFFF}" 
+                               HorizontalOptions="Center"/>
+                    </Border>
+                </VerticalStackLayout>
+            </Border>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

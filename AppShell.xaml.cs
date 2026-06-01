@@ -1,10 +1,13 @@
-﻿namespace DailyFoodSetApp
+﻿using DailyFoodSetApp.Views;
+
+namespace DailyFoodSetApp;
+
+public partial class AppShell : Shell
 {
-    public partial class AppShell : Shell
+    public AppShell()
     {
-        public AppShell()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+
+        Routing.RegisterRoute(nameof(FoodDetailPage), typeof(FoodDetailPage));
     }
 }

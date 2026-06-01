@@ -30,5 +30,13 @@ public partial class MealGeneratorPage : ContentPage
 
         MealPlanCollection.ItemsSource = plan;
         ResultsContainer.IsVisible = true;
+
+        await Task.Delay(100);
+        DailyFoodSetApp.Services.AccessibilityService.ApplyFontScale(this);
+    }
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        DailyFoodSetApp.Services.AccessibilityService.ApplyFontScale(this);
     }
 }

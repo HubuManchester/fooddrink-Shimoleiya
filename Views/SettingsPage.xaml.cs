@@ -1,9 +1,50 @@
+using System;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.ApplicationModel;
+using Microsoft.Maui.Storage;
+using DailyFoodSetApp.Services;
+
 namespace DailyFoodSetApp.Views;
 
 public partial class SettingsPage : ContentPage
 {
-	public SettingsPage()
-	{
-		InitializeComponent();
-	}
+    private const string ThemeIndexKey = "AppThemeIndex";
+
+    public SettingsPage()
+    {
+        InitializeComponent();
+
+        ThemePicker.SelectedIndex = Preferences.Default.Get(ThemeIndexKey, 0);
+        FontSizeSlider.Value = AccessibilityService.CurrentFontScale;
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        DailyFoodSetApp.Services.AccessibilityService.ApplyFontScale(this);
+    }
+
+    private void OnThemeChanged(object sender, EventArgs e)
+    {
+        if (Application.Current == null) return;
+
+        int selectedIndex = ThemePicker.SelectedIndex;
+        Preferences.Default.Set(ThemeIndexKey, selectedIndex);
+
+        Application.Current.UserAppTheme = selectedIndex switch
+        {
+            1 => AppTheme.Light,
+            2 => AppTheme.Dark,
+            _ => AppTheme.Unspecified
+        };
+
+        SemanticScreenReader.Announce("Theme has been updated.");
+    }
+
+    private void OnFontSizeChanged(object sender, ValueChangedEventArgs e)
+    {
+        AccessibilityService.CurrentFontScale = e.NewValue;
+        AccessibilityService.ApplyFontScale(this);
+    }
+
 }

@@ -49,6 +49,12 @@ public static class FoodService
             .OrderBy(f => f.Name).ToList();
     }
 
+    public static async Task<FoodItem> GetFoodByIdAsync(string id)
+    {
+        var allItems = await GetAllFoodsAsync();
+        return allItems.FirstOrDefault(f => f.Id == id);
+    }
+
     public static async Task<List<FoodItem>> GenerateMealPlanAsync(int targetCalories, string preferredSpiciness)
     {
         var allItems = await GetAllFoodsAsync();
