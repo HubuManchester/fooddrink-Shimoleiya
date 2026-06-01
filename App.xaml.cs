@@ -5,9 +5,10 @@
         public App()
         {
             InitializeComponent();
+
             int savedTheme = Microsoft.Maui.Storage.Preferences.Default.Get("AppThemeIndex", 0);
 
-            Application.Current.UserAppTheme = savedTheme switch
+            UserAppTheme = savedTheme switch
             {
                 1 => AppTheme.Light,
                 2 => AppTheme.Dark,
