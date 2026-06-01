@@ -14,9 +14,9 @@ namespace DailyFoodSetApp.Views;
 public class SocialPost
 {
     public string Id { get; set; } = Guid.NewGuid().ToString("N");
-    public string ImagePath { get; set; }
-    public string Description { get; set; }
-    public string LocationInfo { get; set; }
+    public string? ImagePath { get; set; }
+    public string? Description { get; set; }
+    public string? LocationInfo { get; set; }
 
     public bool HasImage => !string.IsNullOrEmpty(ImagePath);
     public bool HasLocation => !string.IsNullOrWhiteSpace(LocationInfo);
@@ -27,8 +27,8 @@ public partial class HardwarePage : ContentPage
     public ObservableCollection<SocialPost> FeedPosts { get; set; } = new();
 
     private bool _isFlashlightOn = false;
-    private byte[] _currentImageBytes;
-    private string _currentLocationText;
+    private byte[]? _currentImageBytes;
+    private string? _currentLocationText;
 
     public HardwarePage()
     {
@@ -137,24 +137,23 @@ public partial class HardwarePage : ContentPage
                 await DisplayAlert("Got it!", "Your location has been added to your post.", "Awesome");
             }
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            await DisplayAlert("Oops!", "We couldn't get your location. Please check your device settings.", "Okay");
         }
     }
 
     private void OnShareClicked(object sender, EventArgs e)
     {
         TriggerHapticFeedback();
-        string textContent = PostDescriptionEditor.Text?.Trim();
+        string? textContent = PostDescriptionEditor.Text?.Trim();
 
         if (string.IsNullOrWhiteSpace(textContent) && _currentImageBytes == null)
         {
-            DisplayAlert("Almost there!", "Please add a photo or write something before sharing.", "Okay");
+            DisplayAlert("Validation", "Please provide a description or a photo to publish.", "OK");
             return;
         }
 
-        string savedImagePath = null;
+        string? savedImagePath = null;
         if (_currentImageBytes != null)
         {
             savedImagePath = Path.Combine(FileSystem.CacheDirectory, $"post_{Guid.NewGuid():N}.jpg");

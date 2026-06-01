@@ -76,7 +76,7 @@ public partial class MealGeneratorPage : ContentPage
         await DisplayAlert("Surprise Me!", "Shake your phone to discover a random tasty food!", "Awesome");
     }
 
-    private void Accelerometer_ShakeDetected(object sender, EventArgs e)
+    private void Accelerometer_ShakeDetected(object? sender, EventArgs e)
     {
         if (_isShakeEventBusy) return;
         _isShakeEventBusy = true;

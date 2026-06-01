@@ -11,8 +11,8 @@ namespace DailyFoodSetApp.Views;
 [QueryProperty(nameof(TargetFoodId), "id")]
 public partial class FoodDetailPage : ContentPage
 {
-    private FoodItem currentTargetItem;
-    private CancellationTokenSource _ttsCts;
+    private FoodItem? currentTargetItem;
+    private CancellationTokenSource? _ttsCts;
 
     public string TargetFoodId
     {

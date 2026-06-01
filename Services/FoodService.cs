@@ -98,7 +98,7 @@ public static class FoodService
             .OrderBy(f => f.Name).ToList();
     }
 
-    public static async Task<FoodItem> GetFoodByIdAsync(string id)
+    public static async Task<FoodItem?> GetFoodByIdAsync(string id)
     {
         var allItems = await GetAllFoodsAsync();
         return allItems.FirstOrDefault(f => f.Id == id);
