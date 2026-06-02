@@ -1,9 +1,9 @@
 # DailyFoodSetApp 
 
 **Author:** Xu Chengze  
-**Module:** 6G6Z0014 - Mobile Computing  
+**Module:** Mobile Computing  
 **Framework:** .NET MAUI .NET 8.0 
-**Tested Deployment Devices:** Windows PC, Android Smartphone, and Android Tablet (Cross-Platform Ready)
+**Tested Deployment Devices:** Windows PC, Android Smartphone, and Android Tablet
 
 ---
 
